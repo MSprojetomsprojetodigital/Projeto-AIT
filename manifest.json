@@ -1,7 +1,7 @@
 {
   "name": "AIT Simulado Academy",
   "short_name": "AIT Simulado",
-  "description": "Preparacao para prova do DETRAN - Categorias A, B, C, D, E",
+  "description": "Preparação para prova do DETRAN - Categorias A, B, C, D, E",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0f172a",

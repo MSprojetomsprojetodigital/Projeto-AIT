@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#3b82f6">
-<meta name="description" content="AIT Simulado Academy - Preparacao para prova do DETRAN">
+<meta name="description" content="AIT Simulado Academy - Preparação para prova do DETRAN">
 <link rel="manifest" href="/manifest.json">
 <title>AIT Simulado Academy</title>
 <style>
@@ -188,7 +188,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <button class="back-btn" id="backBtn" onclick="goBack()">←</button>
     <div>
       <h1 id="headerTitle">AIT Simulado Academy</h1>
-      <div class="subtitle" id="headerSubtitle">Preparacao DETRAN</div>
+      <div class="subtitle" id="headerSubtitle">Preparação DETRAN</div>
     </div>
   </div>
   <div class="user-badge" id="userBadge" onclick="showProfile()">Cat B</div>
@@ -197,58 +197,58 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 <!-- SCREEN: HOME -->
 <div class="screen active" id="screen-home">
   <div class="disclaimer">
-    ⚠️ Este aplicativo e apenas para fins educacionais. Nao substitui o curso obrigatorio do DETRAN. Consulte seu CFC para informacoes oficiais.
+    ⚠️ Este aplicativo é apenas para fins educacionais. Não substitui o curso obrigatório do DETRAN. Consulte seu CFC para informações oficiais.
   </div>
 
   <div class="section-title">Trilha de Estudo</div>
 
   <div class="phase-card card current" onclick="openPhase(0)">
     <div class="card-header">
-      <h3>📚 Fase 1 — Legislacao</h3>
+      <h3>📚 Fase 1 — Legislação</h3>
       <span class="badge badge-blue" id="phase0-badge">Em andamento</span>
     </div>
-    <p>CTB, sinalizacao, infraces, penalidades e normas gerais de circulacao</p>
+    <p>CTB, sinalização, infrações, penalidades e normas gerais de circulação</p>
     <div class="progress-bar"><div class="progress-fill blue" id="phase0-progress" style="width:0%"></div></div>
     <div style="font-size:11px;color:var(--gray)" id="phase0-pct">0% completo</div>
   </div>
 
   <div class="phase-card card locked" id="phase1-card" onclick="openPhase(1)">
     <div class="card-header">
-      <h3>🚗 Fase 2 — Direcao e Socorros</h3>
+      <h3>🚗 Fase 2 — Direção e Socorros</h3>
       <span class="badge badge-gray" id="phase1-badge">Bloqueado</span>
     </div>
-    <p>Direcao defensiva, primeiros socorros, meio ambiente e cidadania</p>
+    <p>Direção defensiva, primeiros socorros, meio ambiente e cidadania</p>
     <div class="progress-bar"><div class="progress-fill blue" id="phase1-progress" style="width:0%"></div></div>
     <div style="font-size:11px;color:var(--gray)" id="phase1-pct">0% completo</div>
   </div>
 
   <div class="phase-card card locked" id="phase2-card" onclick="openPhase(2)">
     <div class="card-header">
-      <h3>🔧 Fase 3 — Mecanica e Categoria</h3>
+      <h3>🔧 Fase 3 — Mecânica e Categoria</h3>
       <span class="badge badge-gray" id="phase2-badge">Bloqueado</span>
     </div>
-    <p>Mecanica basica, funcionamento do veiculo e conteudo especifico da categoria</p>
+    <p>Mecânica básica, funcionamento do veículo e conteúdo específico da categoria</p>
     <div class="progress-bar"><div class="progress-fill blue" id="phase2-progress" style="width:0%"></div></div>
     <div style="font-size:11px;color:var(--gray)" id="phase2-pct">0% completo</div>
   </div>
 
-  <div class="section-title">Acesso Rapido</div>
+  <div class="section-title">Acesso Rápido</div>
 
   <div class="scroll-x">
     <div class="card" style="min-width:160px;cursor:pointer" onclick="startSimulado()">
       <div style="font-size:28px;margin-bottom:8px">📝</div>
       <h3 style="font-size:13px">Simulado DETRAN</h3>
-      <p style="font-size:11px">30 questoes, 40 min</p>
+      <p style="font-size:11px">30 questões, 40 min</p>
     </div>
     <div class="card" style="min-width:160px;cursor:pointer" onclick="navigate('screen-errors')">
       <div style="font-size:28px;margin-bottom:8px">❌</div>
-      <h3 style="font-size:13px">Revisao de Erros</h3>
+      <h3 style="font-size:13px">Revisão de Erros</h3>
       <p style="font-size:11px" id="errorCount">0 erros para revisar</p>
     </div>
     <div class="card" style="min-width:160px;cursor:pointer" onclick="navigate('screen-stats')">
       <div style="font-size:28px;margin-bottom:8px">📊</div>
       <h3 style="font-size:13px">Desempenho</h3>
-      <p style="font-size:11px">Veja suas estatisticas</p>
+      <p style="font-size:11px">Veja suas estatísticas</p>
     </div>
   </div>
 </div>
@@ -264,8 +264,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 <div class="screen" id="screen-content">
   <div class="content-viewer" id="contentViewer"></div>
   <div style="margin-top:16px;padding:0 16px">
-    <button class="btn btn-primary" onclick="markTopicComplete()">Concluir Topico ✓</button>
-    <button class="btn btn-outline" style="margin-top:8px" onclick="startTopicQuiz()">Praticar Questoes</button>
+    <button class="btn btn-primary" onclick="markTopicComplete()">Concluir Tópico ✓</button>
+    <button class="btn btn-outline" style="margin-top:8px" onclick="startTopicQuiz()">Praticar Questões</button>
   </div>
 </div>
 
@@ -277,16 +277,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   <div class="cat-grid">
     <div class="cat-btn" onclick="selectCategory('A')"><div class="letter">A</div><div class="label">Moto</div></div>
     <div class="cat-btn selected" onclick="selectCategory('B')"><div class="letter">B</div><div class="label">Carro</div></div>
-    <div class="cat-btn" onclick="selectCategory('C')"><div class="letter">C</div><div class="label">Caminhao</div></div>
-    <div class="cat-btn" onclick="selectCategory('D')"><div class="letter">D</div><div class="label">Onibus</div></div>
+    <div class="cat-btn" onclick="selectCategory('C')"><div class="letter">C</div><div class="label">Caminhão</div></div>
+    <div class="cat-btn" onclick="selectCategory('D')"><div class="letter">D</div><div class="label">Ônibus</div></div>
     <div class="cat-btn" onclick="selectCategory('E')"><div class="letter">E</div><div class="label">Reboque</div></div>
     <div class="cat-btn" onclick="selectCategory('AB')"><div class="letter">AB</div><div class="label">Moto+Carro</div></div>
   </div>
 
   <div class="card" style="margin-top:16px">
-    <h3 style="font-size:14px;margin-bottom:8px">Configuracao do Simulado</h3>
+    <h3 style="font-size:14px;margin-bottom:8px">Configuração do Simulado</h3>
     <div class="stat-row">
-      <span class="stat-label">Questoes</span>
+      <span class="stat-label">Questões</span>
       <span class="stat-value">30</span>
     </div>
     <div class="stat-row">
@@ -294,7 +294,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
       <span class="stat-value">40 minutos</span>
     </div>
     <div class="stat-row">
-      <span class="stat-label">Aprovacao</span>
+      <span class="stat-label">Aprovação</span>
       <span class="stat-value">70% (21 acertos)</span>
     </div>
   </div>
@@ -305,7 +305,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 <!-- SCREEN: QUIZ -->
 <div class="screen" id="screen-quiz">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-    <div class="question-num" id="questionNum">Questao 1/30</div>
+    <div class="question-num" id="questionNum">Questão 1/30</div>
     <div class="timer" id="quizTimer">⏱ 40:00</div>
   </div>
   <div class="quiz-progress" id="quizProgress"></div>
@@ -314,7 +314,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   <div class="explanation" id="explanation"></div>
   <div class="quiz-actions" id="quizActions">
     <button class="btn btn-outline btn-sm" onclick="skipQuestion()">Pular</button>
-    <button class="btn btn-primary btn-sm" id="nextBtn" onclick="nextQuestion()" style="display:none">Proxima →</button>
+    <button class="btn btn-primary btn-sm" id="nextBtn" onclick="nextQuestion()" style="display:none">Próxima →</button>
     <button class="btn btn-primary btn-sm" id="confirmBtn" onclick="confirmAnswer()">Confirmar</button>
   </div>
 </div>
@@ -342,21 +342,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   <div id="themePerformance"></div>
 
   <button class="btn btn-outline" style="margin-top:12px" onclick="reviewErrors()">Revisar Erros</button>
-  <button class="btn btn-primary" style="margin-top:8px" onclick="navigate('screen-home')">Voltar ao Inicio</button>
+  <button class="btn btn-primary" style="margin-top:8px" onclick="navigate('screen-home')">Voltar ao Início</button>
 
   <div class="disclaimer" style="margin-top:16px">
-    Este resultado e apenas indicativo. A prova oficial do DETRAN pode ter formato e questoes diferentes.
+    Este resultado é apenas indicativo. A prova oficial do DETRAN pode ter formato e questões diferentes.
   </div>
 </div>
 
 <!-- SCREEN: ERROR REVIEW -->
 <div class="screen" id="screen-errors">
-  <h2 style="font-size:18px;margin-bottom:4px">Revisao de Erros</h2>
-  <p style="font-size:12px;color:var(--gray);margin-bottom:16px">Revise as questoes que voce errou com explicacoes legais</p>
+  <h2 style="font-size:18px;margin-bottom:4px">Revisão de Erros</h2>
+  <p style="font-size:12px;color:var(--gray);margin-bottom:16px">Revise as questões que você errou com explicações legais</p>
   <div id="errorList">
     <div style="text-align:center;padding:40px;color:var(--gray)">
       <div style="font-size:40px;margin-bottom:12px">✅</div>
-      <p>Nenhum erro para revisar ainda. Faca um simulado para comecar!</p>
+      <p>Nenhum erro para revisar ainda. Faça um simulado para começar!</p>
     </div>
   </div>
 </div>
@@ -372,17 +372,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     </div>
     <div class="card big-stat">
       <div class="number" id="avgScore" style="color:var(--green)">0%</div>
-      <div class="label">Media Geral</div>
+      <div class="label">Média Geral</div>
     </div>
   </div>
 
   <div class="card">
-    <h3 style="font-size:14px;margin-bottom:12px">Aptidao por Tema</h3>
+    <h3 style="font-size:14px;margin-bottom:12px">Aptidão por Tema</h3>
     <div id="aptitudeChart"></div>
   </div>
 
   <div class="card" style="margin-top:12px">
-    <h3 style="font-size:14px;margin-bottom:12px">Historico de Simulados</h3>
+    <h3 style="font-size:14px;margin-bottom:12px">Histórico de Simulados</h3>
     <div id="historyList">
       <p style="font-size:13px;color:var(--gray)">Nenhum simulado realizado ainda.</p>
     </div>
@@ -394,7 +394,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   <h2 style="font-size:18px;margin-bottom:16px">Perfil</h2>
 
   <div class="card">
-    <h3 style="font-size:14px;margin-bottom:12px">Categoria Padrao</h3>
+    <h3 style="font-size:14px;margin-bottom:12px">Categoria Padrão</h3>
     <div class="cat-grid">
       <div class="cat-btn" onclick="setDefaultCat('A')"><div class="letter">A</div></div>
       <div class="cat-btn selected" id="profCatB" onclick="setDefaultCat('B')"><div class="letter">B</div></div>
@@ -408,7 +408,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   <div class="card">
     <h3 style="font-size:14px;margin-bottom:12px">Dados</h3>
     <div class="stat-row"><span class="stat-label">Simulados realizados</span><span class="stat-value" id="profSimCount">0</span></div>
-    <div class="stat-row"><span class="stat-label">Questoes respondidas</span><span class="stat-value" id="profQCount">0</span></div>
+    <div class="stat-row"><span class="stat-label">Questões respondidas</span><span class="stat-value" id="profQCount">0</span></div>
     <div class="stat-row"><span class="stat-label">Taxa de acerto</span><span class="stat-value" id="profAccuracy">0%</span></div>
     <div class="stat-row"><span class="stat-label">Melhor simulado</span><span class="stat-value" id="profBest">--</span></div>
   </div>
@@ -416,7 +416,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   <button class="btn btn-outline" style="margin-top:12px;color:var(--red);border-color:var(--red)" onclick="clearData()">Limpar Todos os Dados</button>
 
   <div class="disclaimer" style="margin-top:16px">
-    Seus dados sao armazenados apenas neste dispositivo (localStorage). Nenhuma informacao pessoal e coletada ou enviada a servidores. Conforme LGPD Art. 7.
+    Seus dados são armazenados apenas neste dispositivo (localStorage). Nenhuma informação pessoal é coletada ou enviada a servidores. Conforme LGPD Art. 7.
   </div>
 </div>
 
@@ -424,7 +424,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 
 <!-- BOTTOM NAV -->
 <div class="nav">
-  <button class="nav-item active" onclick="navigate('screen-home')"><span class="icon">🏠</span>Inicio</button>
+  <button class="nav-item active" onclick="navigate('screen-home')"><span class="icon">🏠</span>Início</button>
   <button class="nav-item" onclick="navigate('screen-phase');openPhase(state.currentPhase)"><span class="icon">📚</span>Estudar</button>
   <button class="nav-item" onclick="startSimulado()"><span class="icon">📝</span>Simulado</button>
   <button class="nav-item" onclick="navigate('screen-stats')"><span class="icon">📊</span>Stats</button>
@@ -436,61 +436,61 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 // QUESTION BANK — Based on CTB and DETRAN exam
 // ============================================
 const QUESTIONS = [
-  // LEGISLACAO
-  {id:1,theme:'Legislacao',text:'Qual e o limite de velocidade em vias locais urbanas, segundo o CTB?',options:['30 km/h','40 km/h','60 km/h','80 km/h'],correct:0,explanation:'Art. 61 do CTB: A velocidade maxima permitida em vias locais e de 30 km/h. Ultrapassar esse limite configura infracao de natureza media (Art. 218, II).',legal:'CTB Art. 61, Art. 218',category:'all'},
-  {id:2,theme:'Legislacao',text:'Dirigir sem possuir CNH ou Permissao para Dirigir e infracao de que natureza?',options:['Leve','Media','Grave','Gravissima'],correct:3,explanation:'Art. 309 do CTB: Dirigir sem habilitacao e infracao gravissima com penalidade de multa (multiplicada por 3) e apreensao do veiculo.',legal:'CTB Art. 162, I e Art. 309',category:'all'},
-  {id:3,theme:'Legislacao',text:'A placa de sinalizacao R-1 (Parada Obrigatoria) tem qual formato?',options:['Circular','Triangular','Octogonal','Quadrada'],correct:2,explanation:'A placa R-1 (PARE) tem formato octogonal (oito lados), cor vermelha com letras brancas. E a unica placa com este formato, facilitando seu reconhecimento mesmo de costas.',legal:'Resolucao CONTRAN 180/2005',category:'all'},
-  {id:4,theme:'Legislacao',text:'Qual a pontuacao de uma infracao gravissima na CNH?',options:['3 pontos','4 pontos','5 pontos','7 pontos'],correct:3,explanation:'Art. 259 do CTB: Infracao gravissima = 7 pontos. Leve = 3, Media = 4, Grave = 5. O condutor pode ter a CNH suspensa ao atingir 40 pontos em 12 meses (ou 20 pontos para quem tem PPD).',legal:'CTB Art. 259',category:'all'},
-  {id:5,theme:'Legislacao',text:'E obrigatorio o uso do cinto de seguranca para todos os ocupantes do veiculo?',options:['Apenas para o motorista','Apenas para os da frente','Sim, para todos','Apenas em rodovias'],correct:2,explanation:'Art. 65 do CTB: O uso do cinto de seguranca e obrigatorio para todos os ocupantes do veiculo, em qualquer via. A infracao e de natureza grave.',legal:'CTB Art. 65 e Art. 167',category:'all'},
-  {id:6,theme:'Legislacao',text:'Qual o prazo para recorrer de uma multa de transito em primeira instancia?',options:['10 dias','15 dias','30 dias','60 dias'],correct:2,explanation:'Art. 282 do CTB: O prazo para apresentacao de defesa previa ou recurso em primeira instancia e de 30 dias, contados da notificacao da penalidade.',legal:'CTB Art. 282',category:'all'},
-  {id:7,theme:'Legislacao',text:'A faixa amarela continua no centro da pista indica:',options:['Ultrapassagem permitida','Proibicao de ultrapassagem','Area de estacionamento','Faixa de pedestres'],correct:1,explanation:'Linha amarela continua no centro da via indica proibicao de ultrapassagem para ambos os sentidos. Ultrapassar em local proibido e infracao gravissima.',legal:'CTB Art. 203, V',category:'all'},
-  {id:8,theme:'Legislacao',text:'Qual a idade minima para obter a Permissao para Dirigir (PPD)?',options:['16 anos','17 anos','18 anos','21 anos'],correct:2,explanation:'Art. 140 do CTB: Para obter a PPD, o candidato deve ter no minimo 18 anos, ser alfabetizado, possuir documento de identidade e CPF.',legal:'CTB Art. 140',category:'all'},
-  {id:9,theme:'Legislacao',text:'Estacionar em frente a garagem sinalizada e infracao de que natureza?',options:['Leve','Media','Grave','Gravissima'],correct:1,explanation:'Art. 181, VIII do CTB: Estacionar o veiculo junto ou sobre hidrantes, registro de agua, tampas de poco de visita de galerias, ou obstruindo garagem sinalizada, e infracao media.',legal:'CTB Art. 181, VIII',category:'all'},
-  {id:10,theme:'Legislacao',text:'O que significa a sigla CTB?',options:['Codigo de Transporte Brasileiro','Codigo de Transito Brasileiro','Conselho de Transito Brasileiro','Central de Transito do Brasil'],correct:1,explanation:'CTB = Codigo de Transito Brasileiro, instituido pela Lei 9.503/1997. E a legislacao que regulamenta o transito em todo o territorio nacional.',legal:'Lei 9.503/1997',category:'all'},
+  // LEGISLAÇÃO
+  {id:1,theme:'Legislação',text:'Qual é o limite de velocidade em vias locais urbanas, segundo o CTB?',options:['30 km/h','40 km/h','60 km/h','80 km/h'],correct:0,explanation:'Art. 61 do CTB: A velocidade máxima permitida em vias locais é de 30 km/h. Ultrapassar esse limite configura infração de natureza média (Art. 218, II).',legal:'CTB Art. 61, Art. 218',category:'all'},
+  {id:2,theme:'Legislação',text:'Dirigir sem possuir CNH ou Permissão para Dirigir é infração de que natureza?',options:['Leve','Média','Grave','Gravíssima'],correct:3,explanation:'Art. 309 do CTB: Dirigir sem habilitação é infração gravíssima com penalidade de multa (multiplicada por 3) e apreensão do veículo.',legal:'CTB Art. 162, I e Art. 309',category:'all'},
+  {id:3,theme:'Legislação',text:'A placa de sinalização R-1 (Parada Obrigatória) tem qual formato?',options:['Circular','Triangular','Octogonal','Quadrada'],correct:2,explanation:'A placa R-1 (PARE) tem formato octogonal (oito lados), cor vermelha com letras brancas. É a única placa com este formato, facilitando seu reconhecimento mesmo de costas.',legal:'Resolução CONTRAN 180/2005',category:'all'},
+  {id:4,theme:'Legislação',text:'Qual a pontuação de uma infração gravíssima na CNH?',options:['3 pontos','4 pontos','5 pontos','7 pontos'],correct:3,explanation:'Art. 259 do CTB: Infração gravíssima = 7 pontos. Leve = 3, Média = 4, Grave = 5. O condutor pode ter a CNH suspensa ao atingir 40 pontos em 12 meses (ou 20 pontos para quem tem PPD).',legal:'CTB Art. 259',category:'all'},
+  {id:5,theme:'Legislação',text:'É obrigatório o uso do cinto de segurança para todos os ocupantes do veículo?',options:['Apenas para o motorista','Apenas para os da frente','Sim, para todos','Apenas em rodovias'],correct:2,explanation:'Art. 65 do CTB: O uso do cinto de segurança é obrigatório para todos os ocupantes do veículo, em qualquer via. A infração é de natureza grave.',legal:'CTB Art. 65 e Art. 167',category:'all'},
+  {id:6,theme:'Legislação',text:'Qual o prazo para recorrer de uma multa de trânsito em primeira instância?',options:['10 dias','15 dias','30 dias','60 dias'],correct:2,explanation:'Art. 282 do CTB: O prazo para apresentação de defesa previa ou recurso em primeira instância é de 30 dias, contados da notificação da penalidade.',legal:'CTB Art. 282',category:'all'},
+  {id:7,theme:'Legislação',text:'A faixa amarela continua no centro da pista indica:',options:['Ultrapassagem permitida','Proibição de ultrapassagem','Área de estacionamento','Faixa de pedestres'],correct:1,explanation:'Linha amarela continua no centro da via indica proibição de ultrapassagem para ambos os sentidos. Ultrapassar em local proibido é infração gravíssima.',legal:'CTB Art. 203, V',category:'all'},
+  {id:8,theme:'Legislação',text:'Qual a idade mínima para obter a Permissão para Dirigir (PPD)?',options:['16 anos','17 anos','18 anos','21 anos'],correct:2,explanation:'Art. 140 do CTB: Para obter a PPD, o candidato deve ter no mínimo 18 anos, ser alfabetizado, possuir documento de identidade e CPF.',legal:'CTB Art. 140',category:'all'},
+  {id:9,theme:'Legislação',text:'Estacionar em frente à garagem sinalizada é infração de que natureza?',options:['Leve','Média','Grave','Gravíssima'],correct:1,explanation:'Art. 181, VIII do CTB: Estacionar o veículo junto ou sobre hidrantes, registro de água, tampas de poço de visita de galerias, ou obstruindo garagem sinalizada, é infração média.',legal:'CTB Art. 181, VIII',category:'all'},
+  {id:10,theme:'Legislação',text:'O que significa a sigla CTB?',options:['Código de Transporte Brasileiro','Código de Trânsito Brasileiro','Conselho de Trânsito Brasileiro','Central de Trânsito do Brasil'],correct:1,explanation:'CTB = Código de Trânsito Brasileiro, instituido pela Lei 9.503/1997. É a legislação que regulamenta o trânsito em todo o território nacional.',legal:'Lei 9.503/1997',category:'all'},
 
-  // DIRECAO DEFENSIVA
-  {id:11,theme:'Direcao Defensiva',text:'Qual e a distancia minima de seguimento recomendada em condicoes normais?',options:['1 segundo','2 segundos','3 segundos','5 segundos'],correct:1,explanation:'A regra dos 2 segundos e a distancia minima de seguimento em condicoes normais. Em pista molhada, deve-se dobrar para 4 segundos.',legal:'Manual DENATRAN - Direcao Defensiva',category:'all'},
-  {id:12,theme:'Direcao Defensiva',text:'O que e aquaplanagem?',options:['Derrapagem em curva','Veiculo desliza sobre lamina de agua','Pneu furado em alta velocidade','Freio travado em descida'],correct:1,explanation:'Aquaplanagem ocorre quando uma camada de agua se forma entre o pneu e o pavimento, fazendo o veiculo perder aderencia. Para evitar: reduza a velocidade e mantenha pneus calibrados com sulcos adequados.',legal:'Manual DENATRAN',category:'all'},
-  {id:13,theme:'Direcao Defensiva',text:'Em caso de neblina, deve-se usar:',options:['Farol alto','Farol baixo e neblina','Apenas pisca-alerta','Luz de freio'],correct:1,explanation:'Em neblina, use farol baixo e farol de neblina (se disponivel). NUNCA use farol alto, pois a luz reflete na neblina e piora a visibilidade.',legal:'CTB Art. 40',category:'all'},
-  {id:14,theme:'Direcao Defensiva',text:'Os 5 elementos da direcao defensiva sao:',options:['Atencao, Previsao, Decisao, Habilidade, Acao','Velocidade, Freio, Direcao, Aceleracao, Visao','Espelhos, Cintos, Freios, Pneus, Luzes','Rua, Carro, Motorista, Pedestre, Clima'],correct:0,explanation:'Os 5 elementos da direcao defensiva: CONHECIMENTO (das leis), ATENCAO (concentracao), PREVISAO (antecipar riscos), DECISAO (agir corretamente) e HABILIDADE (controle do veiculo).',legal:'Manual DENATRAN',category:'all'},
-  {id:15,theme:'Direcao Defensiva',text:'Qual a principal causa de acidentes de transito no Brasil?',options:['Defeito mecanico','Condicao da via','Fator humano','Condicoes climaticas'],correct:2,explanation:'Segundo pesquisas do DENATRAN, o fator humano e responsavel por cerca de 90% dos acidentes de transito, incluindo imprudencia, negligencia e impericia.',legal:'Estatisticas DENATRAN',category:'all'},
+  // DIREÇÃO DEFENSIVA
+  {id:11,theme:'Direção Defensiva',text:'Qual é a distância mínima de seguimento recomendada em condições normais?',options:['1 segundo','2 segundos','3 segundos','5 segundos'],correct:1,explanation:'A regra dos 2 segundos é a distância mínima de seguimento em condições normais. Em pista molhada, deve-se dobrar para 4 segundos.',legal:'Manual DENATRAN - Direção Defensiva',category:'all'},
+  {id:12,theme:'Direção Defensiva',text:'O que é aquaplanagem?',options:['Derrapagem em curva','Veículo desliza sobre lâmina de água','Pneu furado em alta velocidade','Freio travado em descida'],correct:1,explanation:'Aquaplanagem ocorre quando uma camada de água se forma entre o pneu e o pavimento, fazendo o veículo perder aderência. Para evitar: reduza a velocidade e mantenha pneus calibrados com sulcos adequados.',legal:'Manual DENATRAN',category:'all'},
+  {id:13,theme:'Direção Defensiva',text:'Em caso de neblina, deve-se usar:',options:['Farol alto','Farol baixo e neblina','Apenas pisca-alerta','Luz de freio'],correct:1,explanation:'Em neblina, use farol baixo e farol de neblina (se disponível). NUNCA use farol alto, pois a luz reflete na neblina e piora a visibilidade.',legal:'CTB Art. 40',category:'all'},
+  {id:14,theme:'Direção Defensiva',text:'Os 5 elementos da direção defensiva são:',options:['Atenção, Previsão, Decisão, Habilidade, Ação','Velocidade, Freio, Direção, Aceleração, Visão','Espelhos, Cintos, Freios, Pneus, Luzes','Rua, Carro, Motorista, Pedestre, Clima'],correct:0,explanation:'Os 5 elementos da direção defensiva: CONHECIMENTO (das leis), ATENÇÃO (concentração), PREVISÃO (antecipar riscos), DECISÃO (agir corretamente) e HABILIDADE (controle do veículo).',legal:'Manual DENATRAN',category:'all'},
+  {id:15,theme:'Direção Defensiva',text:'Qual a principal causa de acidentes de trânsito no Brasil?',options:['Defeito mecânico','Condição da via','Fator humano','Condições climáticas'],correct:2,explanation:'Segundo pesquisas do DENATRAN, o fator humano é responsável por cerca de 90% dos acidentes de trânsito, incluindo imprudência, negligência e imperícia.',legal:'Estatísticas DENATRAN',category:'all'},
 
   // PRIMEIROS SOCORROS
-  {id:16,theme:'Primeiros Socorros',text:'Ao presenciar um acidente, qual a PRIMEIRA acao a tomar?',options:['Mover as vitimas','Sinalizar o local','Prestar primeiros socorros','Fotografar a cena'],correct:1,explanation:'A primeira acao e SINALIZAR o local para evitar novos acidentes: ligue o pisca-alerta, coloque o triangulo a 30m de distancia (ou mais em rodovias). Depois ligue 192 (SAMU) ou 193 (Bombeiros).',legal:'CTB Art. 176 e Art. 177',category:'all'},
-  {id:17,theme:'Primeiros Socorros',text:'Em caso de suspeita de fratura na coluna, a vitima deve:',options:['Ser sentada imediatamente','Ser movida para local seguro','NAO ser movida ate chegada do SAMU','Receber massagem no local'],correct:2,explanation:'Vitima com suspeita de lesao na coluna NAO deve ser movida, pois movimentos incorretos podem causar paralisia permanente. Mantenha a vitima imobilizada e aguarde o SAMU (192).',legal:'Manual de Primeiros Socorros - DENATRAN',category:'all'},
-  {id:18,theme:'Primeiros Socorros',text:'O numero do SAMU (Servico de Atendimento Movel de Urgencia) e:',options:['190','191','192','193'],correct:2,explanation:'SAMU = 192. Outros numeros importantes: 190 (Policia Militar), 191 (PRF - Policia Rodoviaria Federal), 193 (Corpo de Bombeiros).',legal:'Portaria MS 1.010/2012',category:'all'},
-  {id:19,theme:'Primeiros Socorros',text:'Para conter uma hemorragia externa, deve-se:',options:['Aplicar torniquete imediatamente','Fazer compressao direta no ferimento','Lavar com alcool','Colocar gelo diretamente'],correct:1,explanation:'Para hemorragias externas, faca compressao direta com pano limpo sobre o ferimento. Torniquete so deve ser usado em ultimo caso por profissional treinado.',legal:'Manual Primeiros Socorros DENATRAN',category:'all'},
+  {id:16,theme:'Primeiros Socorros',text:'Ao presenciar um acidente, qual a PRIMEIRA ação a tomar?',options:['Mover as vítimas','Sinalizar o local','Prestar primeiros socorros','Fotografar a cena'],correct:1,explanation:'A primeira ação é SINALIZAR o local para evitar novos acidentes: ligue o pisca-alerta, coloque o triângulo a 30m de distância (ou mais em rodovias). Depois ligue 192 (SAMU) ou 193 (Bombeiros).',legal:'CTB Art. 176 e Art. 177',category:'all'},
+  {id:17,theme:'Primeiros Socorros',text:'Em caso de suspeita de fratura na coluna, a vítima deve:',options:['Ser sentada imediatamente','Ser movida para local seguro','NÃO ser movida até chegada do SAMU','Receber massagem no local'],correct:2,explanation:'Vítima com suspeita de lesão na coluna NÃO deve ser movida, pois movimentos incorretos podem causar paralisia permanente. Mantenha a vítima imobilizada e aguarde o SAMU (192).',legal:'Manual de Primeiros Socorros - DENATRAN',category:'all'},
+  {id:18,theme:'Primeiros Socorros',text:'O número do SAMU (Serviço de Atendimento Móvel de Urgência) é:',options:['190','191','192','193'],correct:2,explanation:'SAMU = 192. Outros números importantes: 190 (Polícia Militar), 191 (PRF - Polícia Rodoviária Federal), 193 (Corpo de Bombeiros).',legal:'Portaria MS 1.010/2012',category:'all'},
+  {id:19,theme:'Primeiros Socorros',text:'Para conter uma hemorragia externa, deve-se:',options:['Aplicar torniquete imediatamente','Fazer compressão direta no ferimento','Lavar com álcool','Colocar gelo diretamente'],correct:1,explanation:'Para hemorragias externas, faça compressão direta com pano limpo sobre o ferimento. Torniquete só deve ser usado em último caso por profissional treinado.',legal:'Manual Primeiros Socorros DENATRAN',category:'all'},
 
   // MEIO AMBIENTE
-  {id:20,theme:'Meio Ambiente',text:'Qual gas emitido pelos veiculos e principal contribuinte para o efeito estufa?',options:['Oxigenio (O2)','Dioxido de Carbono (CO2)','Nitrogenio (N2)','Hidrogenio (H2)'],correct:1,explanation:'O CO2 (dioxido de carbono) e o principal gas de efeito estufa emitido pela queima de combustiveis fosseis nos veiculos. A manutencao adequada do motor reduz essas emissoes.',legal:'Resolucao CONAMA 418/2009',category:'all'},
-  {id:21,theme:'Meio Ambiente',text:'A poluicao sonora causada por veiculos com escapamento adulterado e infracao:',options:['Leve','Media','Grave','Gravissima'],correct:2,explanation:'Art. 230, II do CTB: Conduzir veiculo com equipamento obrigatorio em desacordo com o estabelecido (incluindo escapamento adulterado que cause poluicao sonora) e infracao grave.',legal:'CTB Art. 230, II',category:'all'},
+  {id:20,theme:'Meio Ambiente',text:'Qual gás emitido pelos veículos é o principal contribuinte para o efeito estufa?',options:['Oxigênio (O2)','Dióxido de Carbono (CO2)','Nitrogênio (N2)','Hidrogênio (H2)'],correct:1,explanation:'O CO2 (dióxido de carbono) é o principal gás de efeito estufa emitido pela queima de combustíveis fósseis nos veículos. A manutenção adequada do motor reduz essas emissões.',legal:'Resolução CONAMA 418/2009',category:'all'},
+  {id:21,theme:'Meio Ambiente',text:'A poluição sonora causada por veículos com escapamento adulterado é infração:',options:['Leve','Média','Grave','Gravíssima'],correct:2,explanation:'Art. 230, II do CTB: Conduzir veículo com equipamento obrigatório em desacordo com o estabelecido (incluindo escapamento adulterado que cause poluição sonora) é infração grave.',legal:'CTB Art. 230, II',category:'all'},
 
-  // MECANICA BASICA
-  {id:22,theme:'Mecanica',text:'Qual a funcao do radiador no veiculo?',options:['Filtrar o combustivel','Resfriar o motor','Lubrificar as engrenagens','Gerar energia eletrica'],correct:1,explanation:'O radiador faz parte do sistema de arrefecimento e tem a funcao de resfriar o liquido que circula pelo motor, evitando o superaquecimento.',legal:'Manual de Mecanica Basica DENATRAN',category:'all'},
-  {id:23,theme:'Mecanica',text:'Pneus com sulcos abaixo de 1,6mm devem ser:',options:['Recauchutados','Substituidos','Calibrados','Rodados'],correct:1,explanation:'Pneus com profundidade dos sulcos abaixo de 1,6mm estao "carecas" e devem ser substituidos. Pneus gastos aumentam a distancia de frenagem e o risco de aquaplanagem.',legal:'Resolucao CONTRAN 558/2015',category:'all'},
-  {id:24,theme:'Mecanica',text:'O que indica a luz de oleo acesa no painel?',options:['Troca de oleo em dia','Pressao do oleo baixa','Nivel de combustivel baixo','Motor frio'],correct:1,explanation:'A luz de oleo acesa indica BAIXA PRESSAO do oleo lubrificante. Pare o veiculo imediatamente e verifique o nivel. Dirigir sem oleo pode fundir o motor.',legal:'Manual do Proprietario',category:'all'},
+  // MECÂNICA BÁSICA
+  {id:22,theme:'Mecânica',text:'Qual a função do radiador no veículo?',options:['Filtrar o combustível','Resfriar o motor','Lubrificar as engrenagens','Gerar energia elétrica'],correct:1,explanation:'O radiador faz parte do sistema de arrefecimento e tem a função de resfriar o líquido que circula pelo motor, evitando o superaquecimento.',legal:'Manual de Mecânica Básica DENATRAN',category:'all'},
+  {id:23,theme:'Mecânica',text:'Pneus com sulcos abaixo de 1,6mm devem ser:',options:['Recauchutados','Substituídos','Calibrados','Rodados'],correct:1,explanation:'Pneus com profundidade dos sulcos abaixo de 1,6mm estão "carecas" e devem ser substituídos. Pneus gastos aumentam a distância de frenagem e o risco de aquaplanagem.',legal:'Resolução CONTRAN 558/2015',category:'all'},
+  {id:24,theme:'Mecânica',text:'O que indica a luz de óleo acesa no painel?',options:['Troca de óleo em dia','Pressão do óleo baixa','Nível de combustível baixo','Motor frio'],correct:1,explanation:'A luz de óleo acesa indica BAIXA PRESSÃO do óleo lubrificante. Pare o veículo imediatamente e verifique o nível. Dirigir sem óleo pode fundir o motor.',legal:'Manual do Proprietário',category:'all'},
 
   // CATEGORIA A (Moto)
-  {id:25,theme:'Legislacao',text:'O uso do capacete e obrigatorio para motociclistas e passageiros?',options:['Apenas para o piloto','Apenas em rodovias','Sim, sempre','Apenas acima de 40km/h'],correct:2,explanation:'Art. 54 do CTB: O uso de capacete com viseira ou oculos de protecao e obrigatorio para condutor e passageiro de motocicleta, motoneta e ciclomotor.',legal:'CTB Art. 54 e Art. 244',category:'A'},
-  {id:26,theme:'Legislacao',text:'Transportar passageiro em motocicleta sem equipamento de seguranca e infracao:',options:['Leve','Media','Grave','Gravissima'],correct:2,explanation:'Art. 244 do CTB: Conduzir motocicleta, motoneta e ciclomotor com passageiro sem os equipamentos de seguranca e infracao grave (5 pontos).',legal:'CTB Art. 244',category:'A'},
+  {id:25,theme:'Legislação',text:'O uso do capacete é obrigatório para motociclistas e passageiros?',options:['Apenas para o piloto','Apenas em rodovias','Sim, sempre','Apenas acima de 40km/h'],correct:2,explanation:'Art. 54 do CTB: O uso de capacete com viseira ou óculos de proteção é obrigatório para condutor e passageiro de motocicleta, motoneta e ciclomotor.',legal:'CTB Art. 54 e Art. 244',category:'A'},
+  {id:26,theme:'Legislação',text:'Transportar passageiro em motocicleta sem equipamento de segurança é infração:',options:['Leve','Média','Grave','Gravíssima'],correct:2,explanation:'Art. 244 do CTB: Conduzir motocicleta, motoneta e ciclomotor com passageiro sem os equipamentos de segurança é infração grave (5 pontos).',legal:'CTB Art. 244',category:'A'},
 
   // CATEGORIA C/D/E (Profissional)
-  {id:27,theme:'Legislacao',text:'Qual o tempo maximo de direcao ininterrupta para motoristas profissionais (Cat C/D/E)?',options:['4 horas','5 horas e 30 minutos','6 horas','8 horas'],correct:1,explanation:'Lei 13.103/2015 (Lei do Motorista): O tempo maximo de direcao ininterrupta e de 5 horas e 30 minutos, com intervalo minimo de 30 minutos para descanso.',legal:'Lei 13.103/2015 Art. 235-C',category:'CDE'},
-  {id:28,theme:'Legislacao',text:'O exame toxicologico para motoristas profissionais (Cat C/D/E) deve ser realizado:',options:['Anualmente','A cada 2,5 anos','A cada 5 anos','Apenas na renovacao'],correct:1,explanation:'Lei 13.103/2015: Motoristas de categorias C, D e E devem realizar exame toxicologico a cada 2 anos e 6 meses, alem da habilitacao e renovacao.',legal:'Lei 13.103/2015 Art. 148-A',category:'CDE'},
-  {id:29,theme:'Legislacao',text:'Qual o limite de peso bruto total (PBT) para veiculos da categoria C sem AET?',options:['3.500 kg','7.500 kg','16.000 kg','Depende do veiculo'],correct:3,explanation:'O limite de PBT para categoria C depende do tipo e configuracao do veiculo, conforme CONTRAN. Veiculos acima dos limites legais necessitam de AET (Autorizacao Especial de Transito).',legal:'CTB Art. 99 e Resolucao CONTRAN',category:'CDE'},
-  {id:30,theme:'Legislacao',text:'O descanso minimo entre duas jornadas de trabalho do motorista profissional e de:',options:['6 horas','8 horas','11 horas','12 horas'],correct:2,explanation:'Lei 13.103/2015: O motorista profissional deve ter descanso minimo de 11 horas entre duas jornadas de trabalho, sendo 8 horas ininterruptas.',legal:'Lei 13.103/2015 Art. 235-C',category:'CDE'},
+  {id:27,theme:'Legislação',text:'Qual o tempo máximo de direção ininterrupta para motoristas profissionais (Cat C/D/E)?',options:['4 horas','5 horas e 30 minutos','6 horas','8 horas'],correct:1,explanation:'Lei 13.103/2015 (Lei do Motorista): O tempo máximo de direção ininterrupta é de 5 horas e 30 minutos, com intervalo mínimo de 30 minutos para descanso.',legal:'Lei 13.103/2015 Art. 235-C',category:'CDE'},
+  {id:28,theme:'Legislação',text:'O exame toxicológico para motoristas profissionais (Cat C/D/E) deve ser realizado:',options:['Anualmente','A cada 2,5 anos','A cada 5 anos','Apenas na renovação'],correct:1,explanation:'Lei 13.103/2015: Motoristas de categorias C, D e E devem realizar exame toxicológico a cada 2 anos e 6 meses, além da habilitação e renovação.',legal:'Lei 13.103/2015 Art. 148-A',category:'CDE'},
+  {id:29,theme:'Legislação',text:'Qual o limite de peso bruto total (PBT) para veículos da categoria C sem AET?',options:['3.500 kg','7.500 kg','16.000 kg','Depende do veículo'],correct:3,explanation:'O limite de PBT para categoria C depende do tipo e configuração do veículo, conforme CONTRAN. Veículos acima dos limites legais necessitam de AET (Autorização Especial de Trânsito).',legal:'CTB Art. 99 e Resolução CONTRAN',category:'CDE'},
+  {id:30,theme:'Legislação',text:'O descanso mínimo entre duas jornadas de trabalho do motorista profissional é de:',options:['6 horas','8 horas','11 horas','12 horas'],correct:2,explanation:'Lei 13.103/2015: O motorista profissional deve ter descanso mínimo de 11 horas entre duas jornadas de trabalho, sendo 8 horas ininterruptas.',legal:'Lei 13.103/2015 Art. 235-C',category:'CDE'},
 
   // More general questions
-  {id:31,theme:'Legislacao',text:'Avancar o sinal vermelho do semaforo e infracao:',options:['Media','Grave','Gravissima','Gravissima com suspensao'],correct:2,explanation:'Art. 208 do CTB: Avancar o sinal vermelho do semaforo ou parar sobre a faixa de pedestres e infracao gravissima (7 pontos na CNH).',legal:'CTB Art. 208',category:'all'},
-  {id:32,theme:'Legislacao',text:'Qual o valor da multa para infracao gravissima (2024)?',options:['R$ 130,16','R$ 195,23','R$ 293,47','R$ 880,41'],correct:2,explanation:'Valores das multas (2024): Leve = R$ 88,38 | Media = R$ 130,16 | Grave = R$ 195,23 | Gravissima = R$ 293,47. Fator multiplicador pode triplicar o valor.',legal:'CTB Art. 258',category:'all'},
-  {id:33,theme:'Direcao Defensiva',text:'Ao se aproximar de uma escola, o condutor deve:',options:['Manter a velocidade','Buzinar para alertar','Reduzir a velocidade','Acender o farol alto'],correct:2,explanation:'Art. 29, VII do CTB: O condutor deve reduzir a velocidade ao se aproximar de escolas, hospitais, e locais com grande movimentacao de pedestres.',legal:'CTB Art. 29, VII',category:'all'},
-  {id:34,theme:'Legislacao',text:'Usar o celular ao volante e infracao:',options:['Leve','Media','Grave','Gravissima'],correct:3,explanation:'Art. 252, VI do CTB (alterado pela Lei 13.281/2016): Dirigir utilizando-se de fones nos ouvidos ou de telefone celular e infracao GRAVISSIMA (7 pontos).',legal:'CTB Art. 252, VI',category:'all'},
-  {id:35,theme:'Legislacao',text:'Qual a taxa de alcoolemia permitida para condutores no Brasil?',options:['0,0 (tolerancia zero)','0,05 mg/L','0,10 mg/L','0,33 mg/L'],correct:0,explanation:'Lei 12.760/2012 (Lei Seca): A tolerancia e ZERO. Qualquer concentracao de alcool no sangue detectada pelo etilometro configura infracao gravissima com multa multiplicada por 10.',legal:'CTB Art. 165 e Lei 12.760/2012',category:'all'},
-  {id:36,theme:'Primeiros Socorros',text:'A tecnica de reanimacao cardiopulmonar (RCP) em adultos consiste em:',options:['30 compressoes e 2 ventilacoes','15 compressoes e 1 ventilacao','20 compressoes e 3 ventilacoes','10 compressoes e 2 ventilacoes'],correct:0,explanation:'O protocolo de RCP para adultos: 30 compressoes toracicas seguidas de 2 ventilacoes (respiracao boca a boca). Ritmo: 100-120 compressoes por minuto, com profundidade de 5cm.',legal:'Protocolo AHA (American Heart Association)',category:'all'},
-  {id:37,theme:'Meio Ambiente',text:'O descarte irregular de pneus usados e considerado:',options:['Pratica normal','Crime ambiental','Infracao leve','Nao regulamentado'],correct:1,explanation:'Resolucao CONAMA 416/2009: O descarte irregular de pneus e crime ambiental. Fabricantes e importadores sao obrigados a coletar e dar destinacao adequada.',legal:'Resolucao CONAMA 416/2009',category:'all'},
-  {id:38,theme:'Mecanica',text:'Qual a funcao do sistema ABS nos freios?',options:['Aumentar a potencia de frenagem','Evitar o travamento das rodas','Reduzir o desgaste dos pneus','Aumentar a velocidade'],correct:1,explanation:'O ABS (Anti-lock Braking System) evita o travamento das rodas durante frenagens bruscas, permitindo que o motorista mantenha o controle da direcao.',legal:'Resolucao CONTRAN 312/2009',category:'all'},
-  {id:39,theme:'Legislacao',text:'O que acontece com o condutor que acumular 40 pontos na CNH em 12 meses?',options:['Advertencia','Multa dobrada','Suspensao do direito de dirigir','Cassacao da CNH'],correct:2,explanation:'Art. 261 do CTB: O condutor que atingir 40 pontos em 12 meses tera o direito de dirigir suspenso. Para PPD (Permissao), o limite e de 20 pontos.',legal:'CTB Art. 261',category:'all'},
-  {id:40,theme:'Legislacao',text:'Em uma rotatoria (rotula), quem tem preferencia?',options:['Quem esta entrando','Quem esta dentro da rotatoria','Quem esta a direita','O veiculo maior'],correct:1,explanation:'Art. 29, III do CTB: Nas intersecoes e rotatorias, o veiculo que estiver circulando pela rotatoria tem preferencia sobre o que pretende entrar.',legal:'CTB Art. 29, III',category:'all'},
+  {id:31,theme:'Legislação',text:'Avançar o sinal vermelho do semáforo é infração:',options:['Média','Grave','Gravíssima','Gravíssima com suspensão'],correct:2,explanation:'Art. 208 do CTB: Avançar o sinal vermelho do semáforo ou parar sobre a faixa de pedestres é infração gravíssima (7 pontos na CNH).',legal:'CTB Art. 208',category:'all'},
+  {id:32,theme:'Legislação',text:'Qual o valor da multa para infração gravíssima (2024)?',options:['R$ 130,16','R$ 195,23','R$ 293,47','R$ 880,41'],correct:2,explanation:'Valores das multas (2024): Leve = R$ 88,38 | Média = R$ 130,16 | Grave = R$ 195,23 | Gravíssima = R$ 293,47. Fator multiplicador pode triplicar o valor.',legal:'CTB Art. 258',category:'all'},
+  {id:33,theme:'Direção Defensiva',text:'Ao se aproximar de uma escola, o condutor deve:',options:['Manter a velocidade','Buzinar para alertar','Reduzir a velocidade','Acender o farol alto'],correct:2,explanation:'Art. 29, VII do CTB: O condutor deve reduzir a velocidade ao se aproximar de escolas, hospitais, e locais com grande movimentação de pedestres.',legal:'CTB Art. 29, VII',category:'all'},
+  {id:34,theme:'Legislação',text:'Usar o celular ao volante é infração:',options:['Leve','Média','Grave','Gravíssima'],correct:3,explanation:'Art. 252, VI do CTB (alterado pela Lei 13.281/2016): Dirigir utilizando-se de fones nos ouvidos ou de telefone celular é infração GRAVÍSSIMA (7 pontos).',legal:'CTB Art. 252, VI',category:'all'},
+  {id:35,theme:'Legislação',text:'Qual a taxa de alcoolemia permitida para condutores no Brasil?',options:['0,0 (tolerância zero)','0,05 mg/L','0,10 mg/L','0,33 mg/L'],correct:0,explanation:'Lei 12.760/2012 (Lei Seca): A tolerância é ZERO. Qualquer concentração de álcool no sangue detectada pelo etilômetro configura infração gravíssima com multa multiplicada por 10.',legal:'CTB Art. 165 e Lei 12.760/2012',category:'all'},
+  {id:36,theme:'Primeiros Socorros',text:'A técnica de reanimação cardiopulmonar (RCP) em adultos consiste em:',options:['30 compressões e 2 ventilações','15 compressões e 1 ventilação','20 compressões e 3 ventilações','10 compressões e 2 ventilações'],correct:0,explanation:'O protocolo de RCP para adultos: 30 compressões torácicas seguidas de 2 ventilações (respiração boca a boca). Ritmo: 100-120 compressões por minuto, com profundidade de 5cm.',legal:'Protocolo AHA (American Heart Association)',category:'all'},
+  {id:37,theme:'Meio Ambiente',text:'O descarte irregular de pneus usados é considerado:',options:['Prática normal','Crime ambiental','Infração leve','Não regulamentado'],correct:1,explanation:'Resolução CONAMA 416/2009: O descarte irregular de pneus é crime ambiental. Fabricantes e importadores são obrigados a coletar e dar destinação adequada.',legal:'Resolução CONAMA 416/2009',category:'all'},
+  {id:38,theme:'Mecânica',text:'Qual a função do sistema ABS nos freios?',options:['Aumentar a potência de frenagem','Evitar o travamento das rodas','Reduzir o desgaste dos pneus','Aumentar a velocidade'],correct:1,explanation:'O ABS (Anti-lock Braking System) evita o travamento das rodas durante frenagens bruscas, permitindo que o motorista mantenha o controle da direção.',legal:'Resolução CONTRAN 312/2009',category:'all'},
+  {id:39,theme:'Legislação',text:'O que acontece com o condutor que acumular 40 pontos na CNH em 12 meses?',options:['Advertência','Multa dobrada','Suspensão do direito de dirigir','Cassação da CNH'],correct:2,explanation:'Art. 261 do CTB: O condutor que atingir 40 pontos em 12 meses terá o direito de dirigir suspenso. Para PPD (Permissão), o limite é de 20 pontos.',legal:'CTB Art. 261',category:'all'},
+  {id:40,theme:'Legislação',text:'Em uma rotatória (rótula), quem tem preferência?',options:['Quem está entrando','Quem está dentro da rotatória','Quem está à direita','O veículo maior'],correct:1,explanation:'Art. 29, III do CTB: Nas interseções e rotatórias, o veículo que estiver circulando pela rotatória tem preferência sobre o que pretende entrar.',legal:'CTB Art. 29, III',category:'all'},
 ];
 
 // ============================================
@@ -498,98 +498,98 @@ const QUESTIONS = [
 // ============================================
 const PHASES = [
   {
-    name:'Fase 1 — Legislacao',
-    desc:'Codigo de Transito Brasileiro, sinalizacao, infracoes e penalidades',
+    name:'Fase 1 — Legislação',
+    desc:'Código de Trânsito Brasileiro, sinalização, infrações e penalidades',
     topics:[
-      {id:'ctb-geral',title:'Codigo de Transito Brasileiro',desc:'Estrutura, orgaos e competencias',icon:'📖',
-       content:`<h2>Codigo de Transito Brasileiro (CTB)</h2>
-<p>O CTB foi instituido pela <strong>Lei 9.503/1997</strong> e regulamenta o transito em todo o territorio nacional.</p>
+      {id:'ctb-geral',title:'Código de Trânsito Brasileiro',desc:'Estrutura, órgãos e competências',icon:'📖',
+       content:`<h2>Código de Trânsito Brasileiro (CTB)</h2>
+<p>O CTB foi instituido pela <strong>Lei 9.503/1997</strong> e regulamenta o trânsito em todo o território nacional.</p>
 <h3>Estrutura</h3>
-<ul><li>20 capitulos e 341 artigos</li><li>Abrange veiculos, condutores, pedestres, ciclistas</li><li>Define infracoes, penalidades e medidas administrativas</li></ul>
-<div class="highlight-box"><div class="label">ORGAOS DO SNT</div><div class="value">CONTRAN (normas) → DENATRAN (fiscalizacao federal) → DETRANs (estadual) → JARI (recursos)</div></div>
-<h3>Principios Fundamentais</h3>
-<ul><li>O transito em condicoes seguras e um DIREITO de todos (Art. 1)</li><li>Os orgaos do SNT devem dar PRIORIDADE a defesa da vida</li><li>Todo condutor deve possuir CNH ou PPD</li></ul>`},
-      {id:'sinalizacao',title:'Sinalizacao de Transito',desc:'Placas, semaforos e marcacao viaria',icon:'🚦',
-       content:`<h2>Sinalizacao de Transito</h2>
+<ul><li>20 capítulos e 341 artigos</li><li>Abrange veículos, condutores, pedestres, ciclistas</li><li>Define infrações, penalidades e medidas administrativas</li></ul>
+<div class="highlight-box"><div class="label">ÓRGÃOS DO SNT</div><div class="value">CONTRAN (normas) → DENATRAN (fiscalização federal) → DETRANs (estadual) → JARI (recursos)</div></div>
+<h3>Princípios Fundamentais</h3>
+<ul><li>O trânsito em condições seguras é um DIREITO de todos (Art. 1)</li><li>Os órgãos do SNT devem dar PRIORIDADE à defesa da vida</li><li>Todo condutor deve possuir CNH ou PPD</li></ul>`},
+      {id:'sinalizacao',title:'Sinalização de Trânsito',desc:'Placas, semáforos e marcação viária',icon:'🚦',
+       content:`<h2>Sinalização de Trânsito</h2>
 <h3>Tipos de Placas</h3>
-<ul><li><strong>Regulamentacao (R):</strong> Circulares, fundo branco, borda vermelha. Obrigam ou proibem.</li><li><strong>Advertencia (A):</strong> Quadradas (losango), fundo amarelo. Alertam perigos.</li><li><strong>Indicacao:</strong> Retangulares. Informam direcoes, distancias, servicos.</li></ul>
-<div class="highlight-box"><div class="label">PLACA ESPECIAL</div><div class="value">R-1 (PARE) = unica placa octogonal. R-2 (De a Preferencia) = unica placa triangular invertida.</div></div>
-<h3>Cores da Sinalizacao Horizontal</h3>
+<ul><li><strong>Regulamentação (R):</strong> Circulares, fundo branco, borda vermelha. Obrigam ou proibem.</li><li><strong>Advertência (A):</strong> Quadradas (losango), fundo amarelo. Alertam perigos.</li><li><strong>Indicação:</strong> Retangulares. Informam direções, distâncias, serviços.</li></ul>
+<div class="highlight-box"><div class="label">PLACA ESPECIAL</div><div class="value">R-1 (PARE) = única placa octogonal. R-2 (Dê a Preferência) = única placa triangular invertida.</div></div>
+<h3>Cores da Sinalização Horizontal</h3>
 <ul><li><strong>Amarela:</strong> Separa fluxos opostos (centro da via)</li><li><strong>Branca:</strong> Separa fluxos no mesmo sentido, faixas de pedestres</li><li><strong>Vermelha:</strong> Ciclofaixas e ciclovias</li></ul>`},
-      {id:'infracoes',title:'Infracoes e Penalidades',desc:'Tipos, pontuacao e valores de multas',icon:'⚖️',
-       content:`<h2>Infracoes e Penalidades</h2>
-<h3>Classificacao das Infracoes</h3>
-<ul><li><strong>Leve:</strong> 3 pontos — R$ 88,38</li><li><strong>Media:</strong> 4 pontos — R$ 130,16</li><li><strong>Grave:</strong> 5 pontos — R$ 195,23</li><li><strong>Gravissima:</strong> 7 pontos — R$ 293,47</li></ul>
-<div class="alert-box"><div class="label">ATENCAO</div><div class="value">Fator multiplicador pode triplicar a multa gravissima para R$ 880,41 (ex: dirigir embriagado).</div></div>
-<h3>Suspensao da CNH</h3>
+      {id:'infracoes',title:'Infrações e Penalidades',desc:'Tipos, pontuação e valores de multas',icon:'⚖️',
+       content:`<h2>Infrações e Penalidades</h2>
+<h3>Classificação das Infrações</h3>
+<ul><li><strong>Leve:</strong> 3 pontos — R$ 88,38</li><li><strong>Média:</strong> 4 pontos — R$ 130,16</li><li><strong>Grave:</strong> 5 pontos — R$ 195,23</li><li><strong>Gravíssima:</strong> 7 pontos — R$ 293,47</li></ul>
+<div class="alert-box"><div class="label">ATENÇÃO</div><div class="value">Fator multiplicador pode triplicar a multa gravíssima para R$ 880,41 (ex: dirigir embriagado).</div></div>
+<h3>Suspensão da CNH</h3>
 <ul><li>40 pontos em 12 meses (condutor profissional)</li><li>30 pontos em 12 meses (condutor comum, desde 2021)</li><li>20 pontos para quem tem PPD</li></ul>
-<h3>Cassacao da CNH</h3>
-<ul><li>Reincidencia em 12 meses de infracao com suspensao</li><li>Condenacao por crime de transito</li><li>Envolvimento em acidente grave causado por negligencia</li></ul>`},
-      {id:'normas-circ',title:'Normas de Circulacao',desc:'Preferencias, ultrapassagem e velocidade',icon:'🚗',
-       content:`<h2>Normas Gerais de Circulacao</h2>
-<h3>Limites de Velocidade (onde nao houver sinalizacao)</h3>
-<ul><li><strong>Via local:</strong> 30 km/h</li><li><strong>Via coletora:</strong> 40 km/h</li><li><strong>Via arterial:</strong> 60 km/h</li><li><strong>Via de transito rapido:</strong> 80 km/h</li><li><strong>Rodovias (pista simples):</strong> 60 km/h</li><li><strong>Rodovias (pista dupla):</strong> 100 km/h (auto) / 90 km/h (demais)</li></ul>
-<div class="highlight-box"><div class="label">REGRA DE PREFERENCIA</div><div class="value">Rotatorias: quem esta dentro tem preferencia. Cruzamento sem sinalizacao: preferencia pela DIREITA.</div></div>
+<h3>Cassação da CNH</h3>
+<ul><li>Reincidência em 12 meses de infração com suspensão</li><li>Condenação por crime de trânsito</li><li>Envolvimento em acidente grave causado por negligência</li></ul>`},
+      {id:'normas-circ',title:'Normas de Circulação',desc:'Preferências, ultrapassagem e velocidade',icon:'🚗',
+       content:`<h2>Normas Gerais de Circulação</h2>
+<h3>Limites de Velocidade (onde não houver sinalização)</h3>
+<ul><li><strong>Via local:</strong> 30 km/h</li><li><strong>Via coletora:</strong> 40 km/h</li><li><strong>Via arterial:</strong> 60 km/h</li><li><strong>Via de trânsito rápido:</strong> 80 km/h</li><li><strong>Rodovias (pista simples):</strong> 60 km/h</li><li><strong>Rodovias (pista dupla):</strong> 100 km/h (auto) / 90 km/h (demais)</li></ul>
+<div class="highlight-box"><div class="label">REGRA DE PREFERÊNCIA</div><div class="value">Rotatórias: quem está dentro tem preferência. Cruzamento sem sinalização: preferência pela DIREITA.</div></div>
 <h3>Ultrapassagem</h3>
-<ul><li>Sempre pela ESQUERDA</li><li>Proibida em curvas, pontes, viadutos, tuneis</li><li>Proibida quando houver linha continua amarela</li></ul>`}
+<ul><li>Sempre pela ESQUERDA</li><li>Proibida em curvas, pontes, viadutos, túneis</li><li>Proibida quando houver linha continua amarela</li></ul>`}
     ]
   },
   {
-    name:'Fase 2 — Direcao e Socorros',
-    desc:'Direcao defensiva, primeiros socorros, meio ambiente e cidadania',
+    name:'Fase 2 — Direção e Socorros',
+    desc:'Direção defensiva, primeiros socorros, meio ambiente e cidadania',
     topics:[
-      {id:'dir-defensiva',title:'Direcao Defensiva',desc:'Elementos, tecnicas e prevencao',icon:'🛡️',
-       content:`<h2>Direcao Defensiva</h2>
+      {id:'dir-defensiva',title:'Direção Defensiva',desc:'Elementos, técnicas e prevenção',icon:'🛡️',
+       content:`<h2>Direção Defensiva</h2>
 <h3>5 Elementos</h3>
-<ul><li><strong>Conhecimento:</strong> Dominar as leis de transito</li><li><strong>Atencao:</strong> Estar concentrado na direcao</li><li><strong>Previsao:</strong> Antecipar situacoes de risco</li><li><strong>Decisao:</strong> Tomar a acao correta a tempo</li><li><strong>Habilidade:</strong> Saber controlar o veiculo</li></ul>
-<h3>Condicoes Adversas</h3>
-<ul><li><strong>Luz:</strong> Ofuscamento, penumbra, noite</li><li><strong>Clima:</strong> Chuva, neblina, vento</li><li><strong>Via:</strong> Buracos, desnivel, oleo</li><li><strong>Veiculo:</strong> Pneus gastos, freios ruins</li><li><strong>Condutor:</strong> Sono, alcool, estresse</li></ul>
-<div class="highlight-box"><div class="label">REGRA DOS 2 SEGUNDOS</div><div class="value">Distancia minima de seguimento. Em pista molhada, dobre para 4 segundos. Em neblina, triplique.</div></div>`},
-      {id:'prim-socorros',title:'Primeiros Socorros',desc:'Procedimentos basicos em acidentes',icon:'🚑',
-       content:`<h2>Primeiros Socorros no Transito</h2>
-<h3>Sequencia PAS</h3>
-<ul><li><strong>P — Prevenir:</strong> Sinalizar o local (triangulo a 30m)</li><li><strong>A — Alertar:</strong> Ligar SAMU (192) ou Bombeiros (193)</li><li><strong>S — Socorrer:</strong> Prestar socorro basico se capacitado</li></ul>
-<div class="alert-box"><div class="label">NUNCA FACA</div><div class="value">NAO mova vitima com suspeita de fratura na coluna. NAO de liquidos a vitima inconsciente. NAO retire capacete de motociclista acidentado.</div></div>
+<ul><li><strong>Conhecimento:</strong> Dominar as leis de trânsito</li><li><strong>Atenção:</strong> Estar concentrado na direção</li><li><strong>Previsão:</strong> Antecipar situações de risco</li><li><strong>Decisão:</strong> Tomar a ação correta a tempo</li><li><strong>Habilidade:</strong> Saber controlar o veículo</li></ul>
+<h3>Condições Adversas</h3>
+<ul><li><strong>Luz:</strong> Ofuscamento, penumbra, noite</li><li><strong>Clima:</strong> Chuva, neblina, vento</li><li><strong>Via:</strong> Buracos, desnível, óleo</li><li><strong>Veículo:</strong> Pneus gastos, freios ruins</li><li><strong>Condutor:</strong> Sono, álcool, estresse</li></ul>
+<div class="highlight-box"><div class="label">REGRA DOS 2 SEGUNDOS</div><div class="value">Distância mínima de seguimento. Em pista molhada, dobre para 4 segundos. Em neblina, triplique.</div></div>`},
+      {id:'prim-socorros',title:'Primeiros Socorros',desc:'Procedimentos básicos em acidentes',icon:'🚑',
+       content:`<h2>Primeiros Socorros no Trânsito</h2>
+<h3>Sequência PAS</h3>
+<ul><li><strong>P — Prevenir:</strong> Sinalizar o local (triângulo a 30m)</li><li><strong>A — Alertar:</strong> Ligar SAMU (192) ou Bombeiros (193)</li><li><strong>S — Socorrer:</strong> Prestar socorro básico se capacitado</li></ul>
+<div class="alert-box"><div class="label">NUNCA FAÇA</div><div class="value">NÃO mova vítima com suspeita de fratura na coluna. NÃO dê líquidos à vítima inconsciente. NÃO retire capacete de motociclista acidentado.</div></div>
 <h3>Hemorragias</h3>
-<ul><li>Compressao direta com pano limpo</li><li>Elevar o membro afetado</li><li>Torniquete: SOMENTE em ultimo caso</li></ul>
-<h3>Telefones de Emergencia</h3>
-<ul><li>190 — Policia Militar</li><li>191 — PRF</li><li>192 — SAMU</li><li>193 — Bombeiros</li></ul>`},
-      {id:'meio-ambiente',title:'Meio Ambiente',desc:'Poluicao veicular e responsabilidade',icon:'🌿',
-       content:`<h2>Meio Ambiente e Transito</h2>
-<h3>Poluicao Veicular</h3>
-<ul><li><strong>Atmosferica:</strong> CO, CO2, NOx — contribuem para efeito estufa</li><li><strong>Sonora:</strong> Escapamentos, buzinas, som alto</li><li><strong>Solo e agua:</strong> Vazamento de oleo, descarte de pneus</li></ul>
-<h3>Como Reduzir a Poluicao</h3>
-<ul><li>Manter o motor regulado e em dia com revisoes</li><li>Calibrar pneus adequadamente (economia de combustivel)</li><li>Evitar aceleracoes bruscas</li><li>Desligar o motor em paradas longas</li></ul>
-<div class="highlight-box"><div class="label">LEGISLACAO AMBIENTAL</div><div class="value">PROCONVE (veiculos) e PROMOT (motos) definem limites de emissao. Resolucao CONAMA 418/2009 regulamenta.</div></div>`},
-      {id:'cidadania',title:'Cidadania no Transito',desc:'Convivencia e respeito mutuo',icon:'🤝',
-       content:`<h2>Cidadania no Transito</h2>
-<p>O transito seguro depende da colaboracao de TODOS: motoristas, pedestres, ciclistas e poder publico.</p>
-<h3>Principios</h3>
-<ul><li>Respeitar pedestres nas faixas</li><li>Dar preferencia a idosos, criancas e PCD</li><li>Nao obstruir calcadas e faixas</li><li>Usar buzina apenas quando necessario</li></ul>
+<ul><li>Compressão direta com pano limpo</li><li>Elevar o membro afetado</li><li>Torniquete: SOMENTE em último caso</li></ul>
+<h3>Telefones de Emergência</h3>
+<ul><li>190 — Polícia Militar</li><li>191 — PRF</li><li>192 — SAMU</li><li>193 — Bombeiros</li></ul>`},
+      {id:'meio-ambiente',title:'Meio Ambiente',desc:'Poluição veicular e responsabilidade',icon:'🌿',
+       content:`<h2>Meio Ambiente e Trânsito</h2>
+<h3>Poluição Veicular</h3>
+<ul><li><strong>Atmosférica:</strong> CO, CO2, NOx — contribuem para efeito estufa</li><li><strong>Sonora:</strong> Escapamentos, buzinas, som alto</li><li><strong>Solo e água:</strong> Vazamento de óleo, descarte de pneus</li></ul>
+<h3>Como Reduzir a Poluição</h3>
+<ul><li>Manter o motor regulado e em dia com revisões</li><li>Calibrar pneus adequadamente (economia de combustível)</li><li>Evitar acelerações bruscas</li><li>Desligar o motor em paradas longas</li></ul>
+<div class="highlight-box"><div class="label">LEGISLAÇÃO AMBIENTAL</div><div class="value">PROCONVE (veículos) e PROMOT (motos) definem limites de emissão. Resolução CONAMA 418/2009 regulamenta.</div></div>`},
+      {id:'cidadania',title:'Cidadania no Trânsito',desc:'Convivência e respeito mútuo',icon:'🤝',
+       content:`<h2>Cidadania no Trânsito</h2>
+<p>O trânsito seguro depende da colaboração de TODOS: motoristas, pedestres, ciclistas e poder público.</p>
+<h3>Princípios</h3>
+<ul><li>Respeitar pedestres nas faixas</li><li>Dar preferência a idosos, crianças e PCD</li><li>Não obstruir calçadas e faixas</li><li>Usar buzina apenas quando necessário</li></ul>
 <h3>Mobilidade Urbana</h3>
-<ul><li>Prioridade: pedestres > ciclistas > transporte coletivo > individual</li><li>Compartilhar a via com respeito</li><li>Considerar transporte publico e alternativo</li></ul>`}
+<ul><li>Prioridade: pedestres > ciclistas > transporte coletivo > individual</li><li>Compartilhar a via com respeito</li><li>Considerar transporte público e alternativo</li></ul>`}
     ]
   },
   {
-    name:'Fase 3 — Mecanica e Categoria',
-    desc:'Mecanica basica e conteudo especifico da sua categoria',
+    name:'Fase 3 — Mecânica e Categoria',
+    desc:'Mecânica básica e conteúdo específico da sua categoria',
     topics:[
-      {id:'mecanica-basica',title:'Mecanica Basica',desc:'Sistemas do veiculo e manutencao',icon:'🔧',
-       content:`<h2>Mecanica Basica</h2>
+      {id:'mecanica-basica',title:'Mecânica Básica',desc:'Sistemas do veículo e manutenção',icon:'🔧',
+       content:`<h2>Mecânica Básica</h2>
 <h3>Sistemas Principais</h3>
-<ul><li><strong>Motor:</strong> Transforma energia termica em mecanica</li><li><strong>Arrefecimento:</strong> Radiador, ventoinha, liquido refrigerante</li><li><strong>Lubrificacao:</strong> Oleo do motor, filtro de oleo</li><li><strong>Combustivel:</strong> Tanque, bomba, filtro, injetores</li><li><strong>Eletrico:</strong> Bateria, alternador, fuseis, velas</li><li><strong>Freios:</strong> Disco/tambor, pastilhas, fluido de freio</li><li><strong>Suspensao:</strong> Amortecedores, molas, bandejas</li><li><strong>Direcao:</strong> Caixa de direcao, barra, terminais</li></ul>
-<div class="highlight-box"><div class="label">LUZES DO PAINEL</div><div class="value">Oleo (vermelha) = PARE imediatamente. Temperatura (vermelha) = Motor superaquecido. Bateria (vermelha) = Problema eletrico. ABS (amarela) = Sistema de freio ABS com defeito.</div></div>
-<h3>Manutencao Preventiva</h3>
-<ul><li>Troca de oleo: a cada 5.000-10.000 km</li><li>Calibragem dos pneus: semanalmente</li><li>Verificar nivel de agua do radiador</li><li>Checar luzes e sinalizacao</li></ul>`},
-      {id:'cat-especifica',title:'Conteudo da Categoria',desc:'Regras especificas para sua categoria',icon:'📋',
-       content:`<h2>Conteudo Especifico por Categoria</h2>
+<ul><li><strong>Motor:</strong> Transforma energia térmica em mecânica</li><li><strong>Arrefecimento:</strong> Radiador, ventoinha, líquido refrigerante</li><li><strong>Lubrificação:</strong> Óleo do motor, filtro de óleo</li><li><strong>Combustível:</strong> Tanque, bomba, filtro, injetores</li><li><strong>Elétrico:</strong> Bateria, alternador, fusíveis, velas</li><li><strong>Freios:</strong> Disco/tambor, pastilhas, fluido de freio</li><li><strong>Suspensão:</strong> Amortecedores, molas, bandejas</li><li><strong>Direção:</strong> Caixa de direção, barra, terminais</li></ul>
+<div class="highlight-box"><div class="label">LUZES DO PAINEL</div><div class="value">Óleo (vermelha) = PARE imediatamente. Temperatura (vermelha) = Motor superaquecido. Bateria (vermelha) = Problema elétrico. ABS (amarela) = Sistema de freio ABS com defeito.</div></div>
+<h3>Manutenção Preventiva</h3>
+<ul><li>Troca de óleo: a cada 5.000-10.000 km</li><li>Calibragem dos pneus: semanalmente</li><li>Verificar nível de água do radiador</li><li>Checar luzes e sinalização</li></ul>`},
+      {id:'cat-especifica',title:'Conteúdo da Categoria',desc:'Regras específicas para sua categoria',icon:'📋',
+       content:`<h2>Conteúdo Específico por Categoria</h2>
 <h3>Categoria A — Motocicleta</h3>
-<ul><li>Uso obrigatorio de capacete (piloto e garupa)</li><li>Proibido transitar entre faixas em velocidade incompativel</li><li>Passageiro somente com equipamentos e apoios para pes</li></ul>
-<h3>Categoria B — Automovel</h3>
-<ul><li>Veiculos de ate 3.500 kg e ate 8 lugares + motorista</li><li>Cadeirinha obrigatoria para criancas ate 7 anos e 6 meses</li></ul>
+<ul><li>Uso obrigatório de capacete (piloto e garupa)</li><li>Proibido transitar entre faixas em velocidade incompatível</li><li>Passageiro somente com equipamentos e apoios para pés</li></ul>
+<h3>Categoria B — Automóvel</h3>
+<ul><li>Veículos de até 3.500 kg e até 8 lugares + motorista</li><li>Cadeirinha obrigatória para crianças até 7 anos e 6 meses</li></ul>
 <h3>Categorias C, D, E — Profissional</h3>
-<ul><li>Exame toxicologico obrigatorio a cada 2,5 anos</li><li>Tempo maximo de direcao: 5h30 ininterruptas</li><li>Descanso minimo entre jornadas: 11 horas</li><li>Registro em disco ou meio eletronico</li></ul>
-<div class="alert-box"><div class="label">LEI DO MOTORISTA</div><div class="value">Lei 13.103/2015 regula o exercicio da profissao de motorista de transporte rodoviario de cargas e passageiros.</div></div>`}
+<ul><li>Exame toxicológico obrigatório a cada 2,5 anos</li><li>Tempo máximo de direção: 5h30 ininterruptas</li><li>Descanso mínimo entre jornadas: 11 horas</li><li>Registro em disco ou meio eletrônico</li></ul>
+<div class="alert-box"><div class="label">LEI DO MOTORISTA</div><div class="value">Lei 13.103/2015 regula o exercício da profissão de motorista de transporte rodoviário de cargas e passageiros.</div></div>`}
     ]
   }
 ];
@@ -648,7 +648,7 @@ function navigate(screenId){
   if(screenHistory[screenHistory.length-1]!==screenId)screenHistory.push(screenId);
 
   // Update header
-  const titles={'screen-home':'AIT Simulado Academy','screen-phase':'Estudar','screen-content':'Conteudo','screen-category':'Simulado','screen-quiz':'Simulado DETRAN','screen-result':'Resultado','screen-errors':'Revisao de Erros','screen-stats':'Desempenho','screen-profile':'Perfil'};
+  const titles={'screen-home':'AIT Simulado Academy','screen-phase':'Estudar','screen-content':'Conteúdo','screen-category':'Simulado','screen-quiz':'Simulado DETRAN','screen-result':'Resultado','screen-errors':'Revisão de Erros','screen-stats':'Desempenho','screen-profile':'Perfil'};
   document.getElementById('headerTitle').textContent=titles[screenId]||'AIT Simulado';
 
   // Refresh data on certain screens
@@ -660,7 +660,7 @@ function navigate(screenId){
 
 function goBack(){
   if(quizState&&document.getElementById('screen-quiz').classList.contains('active')){
-    if(confirm('Sair do simulado? Seu progresso sera perdido.')){
+    if(confirm('Sair do simulado? Seu progresso será perdido.')){
       clearInterval(timerInterval);
       quizState=null;
       screenHistory.pop();
@@ -693,7 +693,7 @@ function updateHome(){
       if(state.phasesUnlocked[i]){
         card.classList.remove('locked');
         card.classList.toggle('current',i===state.currentPhase);
-        badge.textContent=pct===100?'Completo':pct>0?'Em andamento':'Disponivel';
+        badge.textContent=pct===100?'Completo':pct>0?'Em andamento':'Disponível';
         badge.className='badge '+(pct===100?'badge-green':pct>0?'badge-blue':'badge-orange');
       }
     } else {
@@ -733,7 +733,7 @@ function openPhase(idx){
       <div class="topic-info">
         <div class="topic-title">${t.title}</div>
         <div class="topic-desc">${t.desc}</div>
-        ${done?'<div class="topic-progress" style="color:var(--green)">✓ Concluido</div>':'<div class="topic-progress">Estudar →</div>'}
+        ${done?'<div class="topic-progress" style="color:var(--green)">✓ Concluído</div>':'<div class="topic-progress">Estudar →</div>'}
       </div>`;
     list.appendChild(div);
   });
@@ -766,7 +766,7 @@ function markTopicComplete(){
     if(allDone && state.currentPhase<2){
       state.phasesUnlocked[state.currentPhase+1]=true;
       saveState();
-      alert('Parabens! Fase concluida! A proxima fase foi desbloqueada.');
+      alert('Parabéns! Fase concluída! A próxima fase foi desbloqueada.');
     }
 
     openPhase(state.currentPhase);
@@ -777,16 +777,16 @@ function startTopicQuiz(){
   if(!currentTopic)return;
   // Filter questions by theme matching current topic
   const themeMap={
-    'ctb-geral':'Legislacao','sinalizacao':'Legislacao','infracoes':'Legislacao','normas-circ':'Legislacao',
-    'dir-defensiva':'Direcao Defensiva','prim-socorros':'Primeiros Socorros','meio-ambiente':'Meio Ambiente','cidadania':'Meio Ambiente',
-    'mecanica-basica':'Mecanica','cat-especifica':'Legislacao'
+    'ctb-geral':'Legislação','sinalizacao':'Legislação','infracoes':'Legislação','normas-circ':'Legislação',
+    'dir-defensiva':'Direção Defensiva','prim-socorros':'Primeiros Socorros','meio-ambiente':'Meio Ambiente','cidadania':'Meio Ambiente',
+    'mecanica-basica':'Mecânica','cat-especifica':'Legislação'
   };
-  const theme=themeMap[currentTopic.id]||'Legislacao';
+  const theme=themeMap[currentTopic.id]||'Legislação';
   const filtered=QUESTIONS.filter(q=>q.theme===theme&&(q.category==='all'||q.category===state.category||
     (q.category==='CDE'&&['C','D','E'].includes(state.category))));
 
   if(filtered.length<5){
-    alert('Poucas questoes disponiveis para este tema. Faca um simulado completo!');
+    alert('Poucas questões disponíveis para este tema. Faça um simulado completo!');
     return;
   }
 
@@ -844,7 +844,7 @@ function renderQuestion(){
   const qs=quizState;
   const q=qs.questions[qs.current];
 
-  document.getElementById('questionNum').textContent=`Questao ${qs.current+1}/${qs.total}`;
+  document.getElementById('questionNum').textContent=`Questão ${qs.current+1}/${qs.total}`;
 
   // Progress dots
   const dotsHtml=qs.answers.map((a,i)=>{
@@ -1002,7 +1002,7 @@ function finishQuiz(){
   circle.className='result-circle '+(passed?'pass':'fail');
   document.getElementById('resultScore').textContent=pct+'%';
   document.getElementById('resultTitle').textContent=passed?'APROVADO!':'REPROVADO';
-  document.getElementById('resultMsg').textContent=passed?'Parabens! Voce atingiu a nota minima de 70%.':'Voce nao atingiu a nota minima de 70%. Continue estudando!';
+  document.getElementById('resultMsg').textContent=passed?'Parabéns! Você atingiu a nota mínima de 70%.':'Você não atingiu a nota mínima de 70%. Continue estudando!';
   document.getElementById('resultCorrect').textContent=correct+'/'+qs.total;
   document.getElementById('resultWrong').textContent=wrong;
   document.getElementById('resultSkipped').textContent=skipped;
@@ -1038,7 +1038,7 @@ function renderErrors(){
   if(state.errors.length===0){
     list.innerHTML=`<div style="text-align:center;padding:40px;color:var(--gray)">
       <div style="font-size:40px;margin-bottom:12px">✅</div>
-      <p>Nenhum erro para revisar. Faca um simulado para comecar!</p></div>`;
+      <p>Nenhum erro para revisar. Faça um simulado para começar!</p></div>`;
     return;
   }
   // Show most recent errors first, max 50
@@ -1091,7 +1091,7 @@ function updateStats(){
       <div class="perf-bar-value" style="color:${color}">${score}%</div>
     </div>`;
   }).join('');
-  document.getElementById('aptitudeChart').innerHTML=aptHtml||'<p style="font-size:13px;color:var(--gray)">Faca simulados para gerar dados.</p>';
+  document.getElementById('aptitudeChart').innerHTML=aptHtml||'<p style="font-size:13px;color:var(--gray)">Faça simulados para gerar dados.</p>';
 
   // History list
   const histEl=document.getElementById('historyList');
@@ -1134,7 +1134,7 @@ function setDefaultCat(cat){
 }
 
 function clearData(){
-  if(confirm('Tem certeza? Todos os dados serao apagados permanentemente.')){
+  if(confirm('Tem certeza? Todos os dados serão apagados permanentemente.')){
     localStorage.removeItem('ait-simulado-state');
     state=defaultState();
     saveState();
