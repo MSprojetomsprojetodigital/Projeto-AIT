@@ -86,6 +86,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .quiz-dot.current{background:var(--blue);box-shadow:0 0 6px var(--blue)}
 .quiz-dot.skipped{background:var(--orange)}
 .question-num{font-size:12px;color:var(--gray);margin-bottom:8px}
+.speak-btn{background:rgba(59,130,246,.15);color:var(--blue);border:none;border-radius:20px;padding:4px 10px;font-size:12px;cursor:pointer}
+.speak-btn.speaking{background:var(--blue);color:#fff}
 .question-text{font-size:15px;font-weight:500;line-height:1.5;margin-bottom:16px}
 .option{background:var(--dark2);border:2px solid var(--dark3);border-radius:var(--radius);padding:12px 16px;margin-bottom:8px;cursor:pointer;font-size:14px;transition:.2s;display:flex;align-items:flex-start;gap:10px}
 .option:active{transform:scale(.98)}
@@ -197,7 +199,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 <!-- SCREEN: HOME -->
 <div class="screen active" id="screen-home">
   <div class="disclaimer">
-    ⚠️ Este aplicativo é apenas para fins educacionais. Não substitui o curso obrigatório do DETRAN. Consulte seu CFC para informações oficiais.
+    ⚠️ Este aplicativo é apenas para fins educacionais. Não substitui o curso teórico oficial (gratuito no app CNH do Brasil). Confirme sempre as regras com o Detran do seu estado.
   </div>
 
   <div class="section-title">Trilha de Estudo</div>
@@ -238,7 +240,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <div class="card" style="min-width:160px;cursor:pointer" onclick="startSimulado()">
       <div style="font-size:28px;margin-bottom:8px">📝</div>
       <h3 style="font-size:13px">Simulado DETRAN</h3>
-      <p style="font-size:11px">30 questões, 40 min</p>
+      <p style="font-size:11px">30 questões, 60 min</p>
     </div>
     <div class="card" style="min-width:160px;cursor:pointer" onclick="navigate('screen-errors')">
       <div style="font-size:28px;margin-bottom:8px">❌</div>
@@ -291,12 +293,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     </div>
     <div class="stat-row">
       <span class="stat-label">Tempo</span>
-      <span class="stat-value">40 minutos</span>
+      <span class="stat-value" id="simTimeLabel">60 minutos</span>
     </div>
     <div class="stat-row">
       <span class="stat-label">Aprovação</span>
-      <span class="stat-value">70% (21 acertos)</span>
+      <span class="stat-value">20 acertos de 30</span>
     </div>
+    <label class="stat-row" style="cursor:pointer">
+      <span class="stat-label">Tempo dobrado (TDAH/TEA)</span>
+      <input type="checkbox" id="doubleTimeChk" onchange="toggleDoubleTime(this.checked)" style="width:20px;height:20px">
+    </label>
+    <p style="font-size:11px;color:var(--gray);margin-top:8px">Regras de 2026 (Banco Nacional de Questões da Senatran). O tempo de prova pode variar conforme o Detran.</p>
   </div>
 
   <button class="btn btn-primary" style="margin-top:16px" onclick="beginSimulado()">Iniciar Simulado</button>
@@ -305,8 +312,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 <!-- SCREEN: QUIZ -->
 <div class="screen" id="screen-quiz">
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-    <div class="question-num" id="questionNum">Questão 1/30</div>
-    <div class="timer" id="quizTimer">⏱ 40:00</div>
+    <div style="display:flex;align-items:center;gap:8px"><div class="question-num" id="questionNum" style="margin-bottom:0">Questão 1/30</div><button class="speak-btn" id="speakBtn" onclick="speakQuestion()" aria-label="Ouvir a questão">🔊 Ouvir</button></div>
+    <div class="timer" id="quizTimer">⏱ 60:00</div>
   </div>
   <div class="quiz-progress" id="quizProgress"></div>
   <div class="question-text" id="questionText"></div>
@@ -438,9 +445,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 const QUESTIONS = [
   // LEGISLAÇÃO
   {id:1,theme:'Legislação',text:'Qual é o limite de velocidade em vias locais urbanas, segundo o CTB?',options:['30 km/h','40 km/h','60 km/h','80 km/h'],correct:0,explanation:'Art. 61 do CTB: A velocidade máxima permitida em vias locais é de 30 km/h. Ultrapassar esse limite configura infração de natureza média (Art. 218, II).',legal:'CTB Art. 61, Art. 218',category:'all'},
-  {id:2,theme:'Legislação',text:'Dirigir sem possuir CNH ou Permissão para Dirigir é infração de que natureza?',options:['Leve','Média','Grave','Gravíssima'],correct:3,explanation:'Art. 309 do CTB: Dirigir sem habilitação é infração gravíssima com penalidade de multa (multiplicada por 3) e apreensão do veículo.',legal:'CTB Art. 162, I e Art. 309',category:'all'},
+  {id:2,theme:'Legislação',text:'Dirigir sem possuir CNH ou Permissão para Dirigir é infração de que natureza?',options:['Leve','Média','Grave','Gravíssima'],correct:3,explanation:'Art. 162, I do CTB: Dirigir sem possuir CNH ou PPD é infração gravíssima, com multa multiplicada por 3 e retenção do veículo até a apresentação de um condutor habilitado. Se gerar perigo de dano, também é crime (Art. 309).',legal:'CTB Art. 162, I e Art. 309',category:'all'},
   {id:3,theme:'Legislação',text:'A placa de sinalização R-1 (Parada Obrigatória) tem qual formato?',options:['Circular','Triangular','Octogonal','Quadrada'],correct:2,explanation:'A placa R-1 (PARE) tem formato octogonal (oito lados), cor vermelha com letras brancas. É a única placa com este formato, facilitando seu reconhecimento mesmo de costas.',legal:'Resolução CONTRAN 180/2005',category:'all'},
-  {id:4,theme:'Legislação',text:'Qual a pontuação de uma infração gravíssima na CNH?',options:['3 pontos','4 pontos','5 pontos','7 pontos'],correct:3,explanation:'Art. 259 do CTB: Infração gravíssima = 7 pontos. Leve = 3, Média = 4, Grave = 5. O condutor pode ter a CNH suspensa ao atingir 40 pontos em 12 meses (ou 20 pontos para quem tem PPD).',legal:'CTB Art. 259',category:'all'},
+  {id:4,theme:'Legislação',text:'Qual a pontuação de uma infração gravíssima na CNH?',options:['3 pontos','4 pontos','5 pontos','7 pontos'],correct:3,explanation:'Art. 259 do CTB: Infração gravíssima = 7 pontos. Leve = 3, Média = 4, Grave = 5. A suspensão por pontos (Art. 261) depende das gravíssimas em 12 meses: 20 pontos se houver 2 ou mais, 30 pontos se houver 1, e 40 pontos se não houver nenhuma.',legal:'CTB Art. 259 e Art. 261',category:'all'},
   {id:5,theme:'Legislação',text:'É obrigatório o uso do cinto de segurança para todos os ocupantes do veículo?',options:['Apenas para o motorista','Apenas para os da frente','Sim, para todos','Apenas em rodovias'],correct:2,explanation:'Art. 65 do CTB: O uso do cinto de segurança é obrigatório para todos os ocupantes do veículo, em qualquer via. A infração é de natureza grave.',legal:'CTB Art. 65 e Art. 167',category:'all'},
   {id:6,theme:'Legislação',text:'Qual o prazo para recorrer de uma multa de trânsito em primeira instância?',options:['10 dias','15 dias','30 dias','60 dias'],correct:2,explanation:'Art. 282 do CTB: O prazo para apresentação de defesa previa ou recurso em primeira instância é de 30 dias, contados da notificação da penalidade.',legal:'CTB Art. 282',category:'all'},
   {id:7,theme:'Legislação',text:'A faixa amarela continua no centro da pista indica:',options:['Ultrapassagem permitida','Proibição de ultrapassagem','Área de estacionamento','Faixa de pedestres'],correct:1,explanation:'Linha amarela continua no centro da via indica proibição de ultrapassagem para ambos os sentidos. Ultrapassar em local proibido é infração gravíssima.',legal:'CTB Art. 203, V',category:'all'},
@@ -452,7 +459,7 @@ const QUESTIONS = [
   {id:11,theme:'Direção Defensiva',text:'Qual é a distância mínima de seguimento recomendada em condições normais?',options:['1 segundo','2 segundos','3 segundos','5 segundos'],correct:1,explanation:'A regra dos 2 segundos é a distância mínima de seguimento em condições normais. Em pista molhada, deve-se dobrar para 4 segundos.',legal:'Manual DENATRAN - Direção Defensiva',category:'all'},
   {id:12,theme:'Direção Defensiva',text:'O que é aquaplanagem?',options:['Derrapagem em curva','Veículo desliza sobre lâmina de água','Pneu furado em alta velocidade','Freio travado em descida'],correct:1,explanation:'Aquaplanagem ocorre quando uma camada de água se forma entre o pneu e o pavimento, fazendo o veículo perder aderência. Para evitar: reduza a velocidade e mantenha pneus calibrados com sulcos adequados.',legal:'Manual DENATRAN',category:'all'},
   {id:13,theme:'Direção Defensiva',text:'Em caso de neblina, deve-se usar:',options:['Farol alto','Farol baixo e neblina','Apenas pisca-alerta','Luz de freio'],correct:1,explanation:'Em neblina, use farol baixo e farol de neblina (se disponível). NUNCA use farol alto, pois a luz reflete na neblina e piora a visibilidade.',legal:'CTB Art. 40',category:'all'},
-  {id:14,theme:'Direção Defensiva',text:'Os 5 elementos da direção defensiva são:',options:['Atenção, Previsão, Decisão, Habilidade, Ação','Velocidade, Freio, Direção, Aceleração, Visão','Espelhos, Cintos, Freios, Pneus, Luzes','Rua, Carro, Motorista, Pedestre, Clima'],correct:0,explanation:'Os 5 elementos da direção defensiva: CONHECIMENTO (das leis), ATENÇÃO (concentração), PREVISÃO (antecipar riscos), DECISÃO (agir corretamente) e HABILIDADE (controle do veículo).',legal:'Manual DENATRAN',category:'all'},
+  {id:14,theme:'Direção Defensiva',text:'Os 5 elementos da direção defensiva são:',options:['Conhecimento, Atenção, Previsão, Decisão, Habilidade','Velocidade, Freio, Direção, Aceleração, Visão','Espelhos, Cintos, Freios, Pneus, Luzes','Rua, Carro, Motorista, Pedestre, Clima'],correct:0,explanation:'Os 5 elementos da direção defensiva: CONHECIMENTO (das leis), ATENÇÃO (concentração), PREVISÃO (antecipar riscos), DECISÃO (agir corretamente) e HABILIDADE (controle do veículo).',legal:'Manual DENATRAN',category:'all'},
   {id:15,theme:'Direção Defensiva',text:'Qual a principal causa de acidentes de trânsito no Brasil?',options:['Defeito mecânico','Condição da via','Fator humano','Condições climáticas'],correct:2,explanation:'Segundo pesquisas do DENATRAN, o fator humano é responsável por cerca de 90% dos acidentes de trânsito, incluindo imprudência, negligência e imperícia.',legal:'Estatísticas DENATRAN',category:'all'},
 
   // PRIMEIROS SOCORROS
@@ -489,7 +496,7 @@ const QUESTIONS = [
   {id:36,theme:'Primeiros Socorros',text:'A técnica de reanimação cardiopulmonar (RCP) em adultos consiste em:',options:['30 compressões e 2 ventilações','15 compressões e 1 ventilação','20 compressões e 3 ventilações','10 compressões e 2 ventilações'],correct:0,explanation:'O protocolo de RCP para adultos: 30 compressões torácicas seguidas de 2 ventilações (respiração boca a boca). Ritmo: 100-120 compressões por minuto, com profundidade de 5cm.',legal:'Protocolo AHA (American Heart Association)',category:'all'},
   {id:37,theme:'Meio Ambiente',text:'O descarte irregular de pneus usados é considerado:',options:['Prática normal','Crime ambiental','Infração leve','Não regulamentado'],correct:1,explanation:'Resolução CONAMA 416/2009: O descarte irregular de pneus é crime ambiental. Fabricantes e importadores são obrigados a coletar e dar destinação adequada.',legal:'Resolução CONAMA 416/2009',category:'all'},
   {id:38,theme:'Mecânica',text:'Qual a função do sistema ABS nos freios?',options:['Aumentar a potência de frenagem','Evitar o travamento das rodas','Reduzir o desgaste dos pneus','Aumentar a velocidade'],correct:1,explanation:'O ABS (Anti-lock Braking System) evita o travamento das rodas durante frenagens bruscas, permitindo que o motorista mantenha o controle da direção.',legal:'Resolução CONTRAN 312/2009',category:'all'},
-  {id:39,theme:'Legislação',text:'O que acontece com o condutor que acumular 40 pontos na CNH em 12 meses?',options:['Advertência','Multa dobrada','Suspensão do direito de dirigir','Cassação da CNH'],correct:2,explanation:'Art. 261 do CTB: O condutor que atingir 40 pontos em 12 meses terá o direito de dirigir suspenso. Para PPD (Permissão), o limite é de 20 pontos.',legal:'CTB Art. 261',category:'all'},
+  {id:39,theme:'Legislação',text:'Um condutor SEM nenhuma infração gravíssima acumulou 40 pontos em 12 meses. O que acontece?',options:['Advertência','Multa dobrada','Suspensão do direito de dirigir','Cassação da CNH'],correct:2,explanation:'Art. 261 do CTB (Lei 14.071/2020): a suspensão ocorre com 20 pontos se houver 2 ou mais gravíssimas, 30 pontos se houver 1, e 40 pontos se não houver nenhuma. Já quem tem a Permissão para Dirigir (PPD) não recebe a CNH definitiva se cometer infração grave ou gravíssima, ou for reincidente em média (Art. 148, §3º).',legal:'CTB Art. 261 e Art. 148',category:'all'},
   {id:40,theme:'Legislação',text:'Em uma rotatória (rótula), quem tem preferência?',options:['Quem está entrando','Quem está dentro da rotatória','Quem está à direita','O veículo maior'],correct:1,explanation:'Art. 29, III do CTB: Nas interseções e rotatórias, o veículo que estiver circulando pela rotatória tem preferência sobre o que pretende entrar.',legal:'CTB Art. 29, III',category:'all'},
 ];
 
@@ -506,7 +513,7 @@ const PHASES = [
 <p>O CTB foi instituido pela <strong>Lei 9.503/1997</strong> e regulamenta o trânsito em todo o território nacional.</p>
 <h3>Estrutura</h3>
 <ul><li>20 capítulos e 341 artigos</li><li>Abrange veículos, condutores, pedestres, ciclistas</li><li>Define infrações, penalidades e medidas administrativas</li></ul>
-<div class="highlight-box"><div class="label">ÓRGÃOS DO SNT</div><div class="value">CONTRAN (normas) → DENATRAN (fiscalização federal) → DETRANs (estadual) → JARI (recursos)</div></div>
+<div class="highlight-box"><div class="label">ÓRGÃOS DO SNT</div><div class="value">CONTRAN (normas) → SENATRAN, antigo DENATRAN (órgão máximo executivo federal) → DETRANs (estadual) → JARI (recursos)</div></div>
 <h3>Princípios Fundamentais</h3>
 <ul><li>O trânsito em condições seguras é um DIREITO de todos (Art. 1)</li><li>Os órgãos do SNT devem dar PRIORIDADE à defesa da vida</li><li>Todo condutor deve possuir CNH ou PPD</li></ul>`},
       {id:'sinalizacao',title:'Sinalização de Trânsito',desc:'Placas, semáforos e marcação viária',icon:'🚦',
@@ -520,15 +527,15 @@ const PHASES = [
        content:`<h2>Infrações e Penalidades</h2>
 <h3>Classificação das Infrações</h3>
 <ul><li><strong>Leve:</strong> 3 pontos — R$ 88,38</li><li><strong>Média:</strong> 4 pontos — R$ 130,16</li><li><strong>Grave:</strong> 5 pontos — R$ 195,23</li><li><strong>Gravíssima:</strong> 7 pontos — R$ 293,47</li></ul>
-<div class="alert-box"><div class="label">ATENÇÃO</div><div class="value">Fator multiplicador pode triplicar a multa gravíssima para R$ 880,41 (ex: dirigir embriagado).</div></div>
+<div class="alert-box"><div class="label">ATENÇÃO</div><div class="value">Algumas infrações gravíssimas têm multa multiplicada. Ex.: dirigir sem habilitação (×3 = R$ 880,41) e dirigir sob efeito de álcool (×10 = R$ 2.934,70).</div></div>
 <h3>Suspensão da CNH</h3>
-<ul><li>40 pontos em 12 meses (condutor profissional)</li><li>30 pontos em 12 meses (condutor comum, desde 2021)</li><li>20 pontos para quem tem PPD</li></ul>
+<p>Desde 2021 (Lei 14.071/2020), o limite de pontos em 12 meses depende das infrações gravíssimas:</p><ul><li><strong>20 pontos:</strong> com 2 ou mais gravíssimas</li><li><strong>30 pontos:</strong> com 1 gravíssima</li><li><strong>40 pontos:</strong> sem nenhuma gravíssima</li><li><strong>Motorista profissional (EAR):</strong> 40 pontos, independentemente das gravíssimas</li><li><strong>PPD:</strong> infração grave ou gravíssima, ou reincidência em média, impede a CNH definitiva</li></ul>
 <h3>Cassação da CNH</h3>
-<ul><li>Reincidência em 12 meses de infração com suspensão</li><li>Condenação por crime de trânsito</li><li>Envolvimento em acidente grave causado por negligência</li></ul>`},
+<ul><li>Dirigir com o direito de dirigir suspenso</li><li>Reincidência, em 12 meses, em infrações específicas (ex.: dirigir sob efeito de álcool, racha, manobras perigosas, dirigir com categoria diferente)</li><li>Condenação judicial por crime de trânsito</li></ul><p>Após a cassação, só é possível voltar a dirigir depois de 2 anos, refazendo o processo de habilitação.</p>`},
       {id:'normas-circ',title:'Normas de Circulação',desc:'Preferências, ultrapassagem e velocidade',icon:'🚗',
        content:`<h2>Normas Gerais de Circulação</h2>
 <h3>Limites de Velocidade (onde não houver sinalização)</h3>
-<ul><li><strong>Via local:</strong> 30 km/h</li><li><strong>Via coletora:</strong> 40 km/h</li><li><strong>Via arterial:</strong> 60 km/h</li><li><strong>Via de trânsito rápido:</strong> 80 km/h</li><li><strong>Rodovias (pista simples):</strong> 60 km/h</li><li><strong>Rodovias (pista dupla):</strong> 100 km/h (auto) / 90 km/h (demais)</li></ul>
+<ul><li><strong>Via local:</strong> 30 km/h</li><li><strong>Via coletora:</strong> 40 km/h</li><li><strong>Via arterial:</strong> 60 km/h</li><li><strong>Via de trânsito rápido:</strong> 80 km/h</li><li><strong>Rodovias (pista dupla):</strong> 110 km/h (automóveis, camionetas e motos) / 90 km/h (demais)</li><li><strong>Rodovias (pista simples):</strong> 100 km/h (automóveis, camionetas e motos) / 90 km/h (demais)</li><li><strong>Estradas (não pavimentadas):</strong> 60 km/h</li></ul>
 <div class="highlight-box"><div class="label">REGRA DE PREFERÊNCIA</div><div class="value">Rotatórias: quem está dentro tem preferência. Cruzamento sem sinalização: preferência pela DIREITA.</div></div>
 <h3>Ultrapassagem</h3>
 <ul><li>Sempre pela ESQUERDA</li><li>Proibida em curvas, pontes, viadutos, túneis</li><li>Proibida quando houver linha continua amarela</li></ul>`}
@@ -586,7 +593,7 @@ const PHASES = [
 <h3>Categoria A — Motocicleta</h3>
 <ul><li>Uso obrigatório de capacete (piloto e garupa)</li><li>Proibido transitar entre faixas em velocidade incompatível</li><li>Passageiro somente com equipamentos e apoios para pés</li></ul>
 <h3>Categoria B — Automóvel</h3>
-<ul><li>Veículos de até 3.500 kg e até 8 lugares + motorista</li><li>Cadeirinha obrigatória para crianças até 7 anos e 6 meses</li></ul>
+<ul><li>Veículos de até 3.500 kg e até 8 lugares + motorista</li><li>Dispositivo de retenção (bebê-conforto, cadeirinha ou assento de elevação) obrigatório para crianças de até 10 anos que não atingiram 1,45 m, no banco traseiro</li></ul>
 <h3>Categorias C, D, E — Profissional</h3>
 <ul><li>Exame toxicológico obrigatório a cada 2,5 anos</li><li>Tempo máximo de direção: 5h30 ininterruptas</li><li>Descanso mínimo entre jornadas: 11 horas</li><li>Registro em disco ou meio eletrônico</li></ul>
 <div class="alert-box"><div class="label">LEI DO MOTORISTA</div><div class="value">Lei 13.103/2015 regula o exercício da profissão de motorista de transporte rodoviário de cargas e passageiros.</div></div>`}
@@ -662,6 +669,7 @@ function goBack(){
   if(quizState&&document.getElementById('screen-quiz').classList.contains('active')){
     if(confirm('Sair do simulado? Seu progresso será perdido.')){
       clearInterval(timerInterval);
+      stopSpeaking();
       quizState=null;
       screenHistory.pop();
       navigate(screenHistory[screenHistory.length-1]||'screen-home');
@@ -798,6 +806,8 @@ function startTopicQuiz(){
 // ============================================
 function startSimulado(){
   navigate('screen-category');
+  document.getElementById('doubleTimeChk').checked=!!state.doubleTime;
+  document.getElementById('simTimeLabel').textContent=state.doubleTime?'120 minutos':'60 minutos';
   // Update selected category
   document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('selected'));
   document.querySelectorAll('.cat-btn').forEach(b=>{
@@ -817,9 +827,10 @@ function selectCategory(cat){
 
 function beginSimulado(){
   let pool=QUESTIONS.filter(q=>q.category==='all'||q.category===state.category||
+    (q.category==='A'&&state.category==='AB')||
     (q.category==='CDE'&&['C','D','E'].includes(state.category)));
   pool=shuffleArray(pool);
-  startQuizWithQuestions(pool.slice(0,30),30,2400);
+  startQuizWithQuestions(pool.slice(0,30),30,state.doubleTime?7200:3600);
 }
 
 function startQuizWithQuestions(questions,total,timeSeconds){
@@ -939,6 +950,7 @@ function nextQuestion(){
 }
 
 function advanceQuestion(){
+  stopSpeaking();
   quizState.current++;
   if(quizState.current>=quizState.total){
     finishQuiz();
@@ -969,13 +981,15 @@ function updateTimerDisplay(){
 }
 
 function finishQuiz(){
+  stopSpeaking();
   clearInterval(timerInterval);
   const qs=quizState;
   const correct=qs.answers.filter(a=>a==='correct').length;
   const wrong=qs.answers.filter(a=>a==='wrong').length;
   const skipped=qs.answers.filter(a=>a==='skipped'||a===null).length;
   const pct=Math.round((correct/qs.total)*100);
-  const passed=pct>=70;
+  const minCorrect=Math.ceil(qs.total*2/3); // 20 de 30
+  const passed=correct>=minCorrect;
   const elapsed=Math.round((Date.now()-qs.startTime)/1000);
   const mins=Math.floor(elapsed/60);
   const secs=elapsed%60;
@@ -1002,7 +1016,7 @@ function finishQuiz(){
   circle.className='result-circle '+(passed?'pass':'fail');
   document.getElementById('resultScore').textContent=pct+'%';
   document.getElementById('resultTitle').textContent=passed?'APROVADO!':'REPROVADO';
-  document.getElementById('resultMsg').textContent=passed?'Parabéns! Você atingiu a nota mínima de 70%.':'Você não atingiu a nota mínima de 70%. Continue estudando!';
+  document.getElementById('resultMsg').textContent=passed?`Parabéns! Você acertou ${correct} e o mínimo era ${minCorrect}.`:`Você acertou ${correct}, mas o mínimo é ${minCorrect}. Continue estudando!`;
   document.getElementById('resultCorrect').textContent=correct+'/'+qs.total;
   document.getElementById('resultWrong').textContent=wrong;
   document.getElementById('resultSkipped').textContent=skipped;
@@ -1147,6 +1161,39 @@ function clearData(){
 // ============================================
 // UTILITIES
 // ============================================
+// ============================================
+// TEMPO DOBRADO E LEITURA EM VOZ ALTA
+// ============================================
+function toggleDoubleTime(on){
+  state.doubleTime=on;
+  saveState();
+  document.getElementById('simTimeLabel').textContent=on?'120 minutos':'60 minutos';
+}
+
+function speakQuestion(){
+  if(!('speechSynthesis' in window)){alert('Seu navegador não tem leitura em voz alta.');return;}
+  const btn=document.getElementById('speakBtn');
+  if(speechSynthesis.speaking){stopSpeaking();return;}
+  const q=quizState.questions[quizState.current];
+  const letters=['A','B','C','D'];
+  const tmp=document.createElement('div');tmp.innerHTML=q.text;
+  let txt=tmp.textContent+'. '+q.options.map((o,i)=>'Alternativa '+letters[i]+': '+o).join('. ');
+  if(quizState.confirmed)txt+='. Explicação: '+q.explanation;
+  const u=new SpeechSynthesisUtterance(txt);
+  u.lang='pt-BR';u.rate=0.95;
+  const v=speechSynthesis.getVoices().find(v=>v.lang&&v.lang.toLowerCase().startsWith('pt'));
+  if(v)u.voice=v;
+  u.onend=u.onerror=()=>btn.classList.remove('speaking');
+  btn.classList.add('speaking');
+  speechSynthesis.speak(u);
+}
+
+function stopSpeaking(){
+  if('speechSynthesis' in window)speechSynthesis.cancel();
+  const btn=document.getElementById('speakBtn');
+  if(btn)btn.classList.remove('speaking');
+}
+
 function shuffleArray(arr){
   const a=[...arr];
   for(let i=a.length-1;i>0;i--){
