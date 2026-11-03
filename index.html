@@ -99,6 +99,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .option.wrong .option-letter{color:var(--red)}
 .explanation{background:rgba(59,130,246,.08);border-left:3px solid var(--blue);padding:12px;border-radius:0 var(--radius) var(--radius) 0;margin-top:12px;font-size:13px;line-height:1.5;display:none}
 .explanation.show{display:block}
+/* Leis */
+.law-card{cursor:pointer}
+.law-card h3{font-size:14px;margin:2px 0 4px}
+.law-card p{font-size:12px}
+.law-art{font-size:11px;color:var(--blue);font-weight:700}
+.law-chip{background:rgba(59,130,246,.15);color:var(--blue);border:1px solid rgba(59,130,246,.4);border-radius:20px;padding:5px 10px;font-size:12px;margin:4px 6px 0 0;cursor:pointer}
+.label-sm{font-size:11px;color:var(--blue);font-weight:700;margin-bottom:4px}
 /* Placas */
 .sign-svg{width:100%;height:100%;display:block}
 .sign-tabs{display:flex;gap:6px;overflow-x:auto;margin:10px 0;padding-bottom:4px}
@@ -255,6 +262,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 
   <div class="section-title">Acesso Rápido</div>
 
+  <div class="card" style="cursor:pointer;border-color:var(--blue)" onclick="openLaws()">
+    <div class="card-header"><h3>📖 Biblioteca de Leis</h3><span class="badge badge-blue">Novo</span></div>
+    <p>Os artigos mais cobrados do CTB, explicados em palavras simples, com busca e questões para praticar.</p>
+  </div>
   <div class="card" style="cursor:pointer;border-color:var(--orange)" onclick="openSigns()">
     <div class="card-header"><h3>🚦 Placas de Trânsito</h3><span class="badge badge-orange">Novo</span></div>
     <p>Regulamentação, advertência, indicação, obras e placas complementares. Com quiz "Que placa é esta?"</p>
@@ -410,6 +421,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   </div>
 </div>
 
+<!-- SCREEN: LEIS -->
+<div class="screen" id="screen-laws">
+  <input class="search-input" id="lawSearch" placeholder="🔍 Buscar (ex.: celular, álcool, 61, pontos)" oninput="renderLawList()">
+  <div class="sign-tabs" id="lawTabs"></div>
+  <p style="font-size:12px;color:var(--gray);margin-bottom:10px" id="lawInfo"></p>
+  <div id="lawList"></div>
+  <p style="font-size:11px;color:var(--gray);margin-top:16px;line-height:1.4">Resumos para estudo do Código de Trânsito Brasileiro (Lei 9.503/1997) e normas recentes. Para o texto oficial e completo, consulte o site do Planalto.</p>
+</div>
+<div class="modal-bg" id="lawModal" onclick="if(event.target===this)closeLaw()">
+  <div class="modal-sheet">
+    <div id="lawModalBody"></div>
+    <button class="btn btn-outline" style="margin-top:12px" onclick="closeLaw()">Fechar</button>
+  </div>
+</div>
+
 <!-- SCREEN: STATS -->
 <div class="screen" id="screen-stats">
   <h2 style="font-size:18px;margin-bottom:16px">Seu Desempenho</h2>
@@ -495,7 +521,7 @@ const QUESTIONS = [
   {id:6,theme:'Legislação',text:'Qual o prazo para recorrer de uma multa de trânsito em primeira instância?',options:['10 dias','15 dias','30 dias','60 dias'],correct:2,explanation:'Art. 282 do CTB: O prazo para apresentação de defesa previa ou recurso em primeira instância é de 30 dias, contados da notificação da penalidade.',legal:'CTB Art. 282',category:'all'},
   {id:7,theme:'Legislação',text:'A faixa amarela continua no centro da pista indica:',options:['Ultrapassagem permitida','Proibição de ultrapassagem','Área de estacionamento','Faixa de pedestres'],correct:1,explanation:'Linha amarela continua no centro da via indica proibição de ultrapassagem para ambos os sentidos. Ultrapassar em local proibido é infração gravíssima.',legal:'CTB Art. 203, V',category:'all'},
   {id:8,theme:'Legislação',text:'Qual a idade mínima para obter a Permissão para Dirigir (PPD)?',options:['16 anos','17 anos','18 anos','21 anos'],correct:2,explanation:'Art. 140 do CTB: Para obter a PPD, o candidato deve ter no mínimo 18 anos, ser alfabetizado, possuir documento de identidade e CPF.',legal:'CTB Art. 140',category:'all'},
-  {id:9,theme:'Legislação',text:'Estacionar em frente à garagem sinalizada é infração de que natureza?',options:['Leve','Média','Grave','Gravíssima'],correct:1,explanation:'Art. 181, VIII do CTB: Estacionar o veículo junto ou sobre hidrantes, registro de água, tampas de poço de visita de galerias, ou obstruindo garagem sinalizada, é infração média.',legal:'CTB Art. 181, VIII',category:'all'},
+  {id:9,theme:'Legislação',text:'Estacionar em frente à garagem sinalizada é infração de que natureza?',options:['Leve','Média','Grave','Gravíssima'],correct:1,explanation:'Art. 181, IX do CTB: Estacionar onde houver guia de calçada (meio-fio) rebaixada destinada à entrada ou saída de veículos (garagem) é infração média.',legal:'CTB Art. 181, IX',category:'all'},
   {id:10,theme:'Legislação',text:'O que significa a sigla CTB?',options:['Código de Transporte Brasileiro','Código de Trânsito Brasileiro','Conselho de Trânsito Brasileiro','Central de Trânsito do Brasil'],correct:1,explanation:'CTB = Código de Trânsito Brasileiro, instituido pela Lei 9.503/1997. É a legislação que regulamenta o trânsito em todo o território nacional.',legal:'Lei 9.503/1997',category:'all'},
 
   // DIREÇÃO DEFENSIVA
@@ -513,7 +539,7 @@ const QUESTIONS = [
 
   // MEIO AMBIENTE
   {id:20,theme:'Meio Ambiente',text:'Qual gás emitido pelos veículos é o principal contribuinte para o efeito estufa?',options:['Oxigênio (O2)','Dióxido de Carbono (CO2)','Nitrogênio (N2)','Hidrogênio (H2)'],correct:1,explanation:'O CO2 (dióxido de carbono) é o principal gás de efeito estufa emitido pela queima de combustíveis fósseis nos veículos. A manutenção adequada do motor reduz essas emissões.',legal:'Resolução CONAMA 418/2009',category:'all'},
-  {id:21,theme:'Meio Ambiente',text:'A poluição sonora causada por veículos com escapamento adulterado é infração:',options:['Leve','Média','Grave','Gravíssima'],correct:2,explanation:'Art. 230, II do CTB: Conduzir veículo com equipamento obrigatório em desacordo com o estabelecido (incluindo escapamento adulterado que cause poluição sonora) é infração grave.',legal:'CTB Art. 230, II',category:'all'},
+  {id:21,theme:'Meio Ambiente',text:'A poluição sonora causada por veículos com escapamento adulterado é infração:',options:['Leve','Média','Grave','Gravíssima'],correct:2,explanation:'Art. 230, XI do CTB: Conduzir veículo com descarga livre ou silenciador do motor defeituoso, deficiente ou inoperante (escapamento barulhento) é infração grave.',legal:'CTB Art. 230, XI',category:'all'},
 
   // MECÂNICA BÁSICA
   {id:22,theme:'Mecânica',text:'Qual a função do radiador no veículo?',options:['Filtrar o combustível','Resfriar o motor','Lubrificar as engrenagens','Gerar energia elétrica'],correct:1,explanation:'O radiador faz parte do sistema de arrefecimento e tem a função de resfriar o líquido que circula pelo motor, evitando o superaquecimento.',legal:'Manual de Mecânica Básica DENATRAN',category:'all'},
@@ -533,8 +559,8 @@ const QUESTIONS = [
   // More general questions
   {id:31,theme:'Legislação',text:'Avançar o sinal vermelho do semáforo é infração:',options:['Média','Grave','Gravíssima','Gravíssima com suspensão'],correct:2,explanation:'Art. 208 do CTB: Avançar o sinal vermelho do semáforo ou parar sobre a faixa de pedestres é infração gravíssima (7 pontos na CNH).',legal:'CTB Art. 208',category:'all'},
   {id:32,theme:'Legislação',text:'Qual o valor da multa para infração gravíssima (2024)?',options:['R$ 130,16','R$ 195,23','R$ 293,47','R$ 880,41'],correct:2,explanation:'Valores das multas (2024): Leve = R$ 88,38 | Média = R$ 130,16 | Grave = R$ 195,23 | Gravíssima = R$ 293,47. Fator multiplicador pode triplicar o valor.',legal:'CTB Art. 258',category:'all'},
-  {id:33,theme:'Direção Defensiva',text:'Ao se aproximar de uma escola, o condutor deve:',options:['Manter a velocidade','Buzinar para alertar','Reduzir a velocidade','Acender o farol alto'],correct:2,explanation:'Art. 29, VII do CTB: O condutor deve reduzir a velocidade ao se aproximar de escolas, hospitais, e locais com grande movimentação de pedestres.',legal:'CTB Art. 29, VII',category:'all'},
-  {id:34,theme:'Legislação',text:'Usar o celular ao volante é infração:',options:['Leve','Média','Grave','Gravíssima'],correct:3,explanation:'Art. 252, VI do CTB (alterado pela Lei 13.281/2016): Dirigir utilizando-se de fones nos ouvidos ou de telefone celular é infração GRAVÍSSIMA (7 pontos).',legal:'CTB Art. 252, VI',category:'all'},
+  {id:33,theme:'Direção Defensiva',text:'Ao se aproximar de uma escola, o condutor deve:',options:['Manter a velocidade','Buzinar para alertar','Reduzir a velocidade','Acender o farol alto'],correct:2,explanation:'Art. 220, XIV do CTB: Deixar de reduzir a velocidade nas proximidades de escolas, hospitais, estações de embarque e desembarque ou onde haja intensa movimentação de pedestres é infração gravíssima.',legal:'CTB Art. 220, XIV',category:'all'},
+  {id:34,theme:'Legislação',text:'Dirigir SEGURANDO ou MANUSEANDO o celular é infração:',options:['Leve','Média','Grave','Gravíssima'],correct:3,explanation:'Art. 252, parágrafo único do CTB (Lei 13.281/2016): dirigir segurando ou manuseando o celular é infração GRAVÍSSIMA (7 pontos). Usar fones de ouvido ou celular sem segurá-lo (inciso VI) é infração média.',legal:'CTB Art. 252',category:'all'},
   {id:35,theme:'Legislação',text:'Qual a taxa de alcoolemia permitida para condutores no Brasil?',options:['0,0 (tolerância zero)','0,05 mg/L','0,10 mg/L','0,33 mg/L'],correct:0,explanation:'Lei 12.760/2012 (Lei Seca): A tolerância é ZERO. Qualquer concentração de álcool no sangue detectada pelo etilômetro configura infração gravíssima com multa multiplicada por 10.',legal:'CTB Art. 165 e Lei 12.760/2012',category:'all'},
   {id:36,theme:'Primeiros Socorros',text:'A técnica de reanimação cardiopulmonar (RCP) em adultos consiste em:',options:['30 compressões e 2 ventilações','15 compressões e 1 ventilação','20 compressões e 3 ventilações','10 compressões e 2 ventilações'],correct:0,explanation:'O protocolo de RCP para adultos: 30 compressões torácicas seguidas de 2 ventilações (respiração boca a boca). Ritmo: 100-120 compressões por minuto, com profundidade de 5cm.',legal:'Protocolo AHA (American Heart Association)',category:'all'},
   {id:37,theme:'Meio Ambiente',text:'O descarte irregular de pneus usados é considerado:',options:['Prática normal','Crime ambiental','Infração leve','Não regulamentado'],correct:1,explanation:'Resolução CONAMA 416/2009: O descarte irregular de pneus é crime ambiental. Fabricantes e importadores são obrigados a coletar e dar destinação adequada.',legal:'Resolução CONAMA 416/2009',category:'all'},
@@ -686,7 +712,7 @@ function navigate(screenId){
 
   // Update nav
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  const navMap={'screen-home':0,'screen-phase':1,'screen-signs':2,'screen-category':3,'screen-quiz':3,'screen-result':3,'screen-stats':4,'screen-profile':5,'screen-errors':4};
+  const navMap={'screen-home':0,'screen-phase':1,'screen-laws':1,'screen-signs':2,'screen-category':3,'screen-quiz':3,'screen-result':3,'screen-stats':4,'screen-profile':5,'screen-errors':4};
   const idx=navMap[screenId];
   if(idx!==undefined)document.querySelectorAll('.nav-item')[idx].classList.add('active');
 
@@ -698,7 +724,7 @@ function navigate(screenId){
   if(screenHistory[screenHistory.length-1]!==screenId)screenHistory.push(screenId);
 
   // Update header
-  const titles={'screen-home':'AIT Simulado Academy','screen-phase':'Estudar','screen-content':'Conteúdo','screen-category':'Simulado','screen-quiz':'Simulado DETRAN','screen-result':'Resultado','screen-errors':'Revisão de Erros','screen-stats':'Desempenho','screen-profile':'Perfil','screen-signs':'Placas de Trânsito'};
+  const titles={'screen-home':'AIT Simulado Academy','screen-phase':'Estudar','screen-content':'Conteúdo','screen-category':'Simulado','screen-quiz':'Simulado DETRAN','screen-result':'Resultado','screen-errors':'Revisão de Erros','screen-stats':'Desempenho','screen-profile':'Perfil','screen-signs':'Placas de Trânsito','screen-laws':'Biblioteca de Leis'};
   document.getElementById('headerTitle').textContent=titles[screenId]||'AIT Simulado';
 
   // Refresh data on certain screens
@@ -963,7 +989,7 @@ function confirmAnswer(){
 
   // Show explanation
   const expEl=document.getElementById('explanation');
-  expEl.innerHTML=`<strong>${isCorrect?'✅ Correto!':'❌ Incorreto!'}</strong><br><br>${q.explanation}<br><br><em style="color:var(--blue)">${q.legal}</em>`;
+  expEl.innerHTML=`<strong>${isCorrect?'✅ Correto!':'❌ Incorreto!'}</strong><br><br>${q.explanation}<br><br><em style="color:var(--blue)">${q.legal}</em>${window.lawLinks?lawLinks(q.legal):''}`;
   expEl.classList.add('show');
 
   // Save error
@@ -1110,7 +1136,7 @@ function renderErrors(){
       <div class="your-answer">Sua resposta: ${e.yourAnswer}</div>
       <div class="correct-answer">Resposta correta: ${e.correctAnswer}</div>
       <div style="font-size:12px;color:var(--gray);margin-top:6px">${e.explanation}</div>
-      <div class="legal-ref">${e.legal}</div>
+      <div class="legal-ref">${e.legal}</div>${window.lawLinks?lawLinks(e.legal):''}
     </div>`).join('');
 }
 
@@ -1260,5 +1286,6 @@ if('serviceWorker' in navigator){
 updateHome();
 </script>
 <script src="/placas.js"></script>
+<script src="/leis.js"></script>
 </body>
 </html>
