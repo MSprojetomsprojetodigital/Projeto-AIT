@@ -1,5 +1,5 @@
-const CACHE_NAME = 'ait-simulado-v3';
-const ASSETS = ['/', '/index.html', '/manifest.json'];
+const CACHE_NAME = 'ait-simulado-v4';
+const ASSETS = ['/', '/index.html', '/manifest.json', '/placas.js'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(ASSETS)));

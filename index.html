@@ -99,6 +99,25 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .option.wrong .option-letter{color:var(--red)}
 .explanation{background:rgba(59,130,246,.08);border-left:3px solid var(--blue);padding:12px;border-radius:0 var(--radius) var(--radius) 0;margin-top:12px;font-size:13px;line-height:1.5;display:none}
 .explanation.show{display:block}
+/* Placas */
+.sign-svg{width:100%;height:100%;display:block}
+.sign-tabs{display:flex;gap:6px;overflow-x:auto;margin:10px 0;padding-bottom:4px}
+.sign-tab{background:var(--dark2);border:2px solid var(--dark3);color:var(--gray);border-radius:20px;padding:6px 12px;font-size:12px;white-space:nowrap;cursor:pointer}
+.sign-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.sign-card{background:var(--dark2);border:1px solid var(--dark3);border-radius:var(--radius);padding:10px 6px;text-align:center;cursor:pointer}
+.sign-card:active{transform:scale(.97)}
+.sign-img{height:70px;display:flex;align-items:center;justify-content:center;margin-bottom:6px}
+.sign-img svg{max-height:70px;width:auto;max-width:100%}
+.sign-code{font-size:10px;color:var(--blue);font-weight:700}
+.sign-name{font-size:11px;color:#cbd5e1;line-height:1.3}
+.sign-big{width:160px;height:160px;margin:8px auto 12px;display:flex;align-items:center;justify-content:center}
+.sign-big svg{max-height:160px;width:auto;max-width:100%}
+.sign-in-q{width:110px;height:110px;margin:0 auto 10px;display:flex;align-items:center;justify-content:center}
+.sign-in-q svg{max-height:110px;width:auto;max-width:100%}
+.search-input{width:100%;padding:12px 14px;border-radius:var(--radius);border:1px solid var(--dark3);background:var(--dark2);color:var(--white);font-size:14px}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:flex-end;justify-content:center;z-index:200}
+.modal-bg.show{display:flex}
+.modal-sheet{background:var(--dark2);width:100%;max-width:480px;border-radius:20px 20px 0 0;padding:20px;max-height:85vh;overflow-y:auto;animation:fadeIn .25s}
 .quiz-actions{display:flex;gap:8px;margin-top:16px}
 .quiz-actions .btn{flex:1}
 
@@ -236,6 +255,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 
   <div class="section-title">Acesso Rápido</div>
 
+  <div class="card" style="cursor:pointer;border-color:var(--orange)" onclick="openSigns()">
+    <div class="card-header"><h3>🚦 Placas de Trânsito</h3><span class="badge badge-orange">Novo</span></div>
+    <p>Regulamentação, advertência, indicação, obras e placas complementares. Com quiz "Que placa é esta?"</p>
+  </div>
   <div class="scroll-x">
     <div class="card" style="min-width:160px;cursor:pointer" onclick="startSimulado()">
       <div style="font-size:28px;margin-bottom:8px">📝</div>
@@ -368,6 +391,25 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   </div>
 </div>
 
+<!-- SCREEN: PLACAS -->
+<div class="screen" id="screen-signs">
+  <div id="signListView">
+    <input class="search-input" id="signSearch" placeholder="🔍 Buscar placa (ex.: lombada, R-19, ônibus)" oninput="renderSignList()">
+    <div class="sign-tabs" id="signTabs"></div>
+    <p style="font-size:12px;color:var(--gray);margin-bottom:10px" id="signGroupDesc"></p>
+    <button class="btn btn-primary" style="margin-bottom:14px" onclick="startSignQuiz()">🎯 Quiz: Que placa é esta?</button>
+    <div class="sign-grid" id="signGrid"></div>
+    <p style="font-size:11px;color:var(--gray);margin-top:16px;line-height:1.4">Desenhos simplificados para estudo, baseados no Manual Brasileiro de Sinalização de Trânsito (CONTRAN).</p>
+  </div>
+  <div id="signQuizView" style="display:none"></div>
+</div>
+<div class="modal-bg" id="signModal" onclick="if(event.target===this)closeSign()">
+  <div class="modal-sheet">
+    <div id="signModalBody"></div>
+    <button class="btn btn-outline" style="margin-top:12px" onclick="closeSign()">Fechar</button>
+  </div>
+</div>
+
 <!-- SCREEN: STATS -->
 <div class="screen" id="screen-stats">
   <h2 style="font-size:18px;margin-bottom:16px">Seu Desempenho</h2>
@@ -433,6 +475,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 <div class="nav">
   <button class="nav-item active" onclick="navigate('screen-home')"><span class="icon">🏠</span>Início</button>
   <button class="nav-item" onclick="navigate('screen-phase');openPhase(state.currentPhase)"><span class="icon">📚</span>Estudar</button>
+  <button class="nav-item" onclick="openSigns()"><span class="icon">🚦</span>Placas</button>
   <button class="nav-item" onclick="startSimulado()"><span class="icon">📝</span>Simulado</button>
   <button class="nav-item" onclick="navigate('screen-stats')"><span class="icon">📊</span>Stats</button>
   <button class="nav-item" onclick="navigate('screen-profile')"><span class="icon">👤</span>Perfil</button>
@@ -643,7 +686,7 @@ function navigate(screenId){
 
   // Update nav
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  const navMap={'screen-home':0,'screen-phase':1,'screen-category':2,'screen-quiz':2,'screen-result':2,'screen-stats':3,'screen-profile':4,'screen-errors':3};
+  const navMap={'screen-home':0,'screen-phase':1,'screen-signs':2,'screen-category':3,'screen-quiz':3,'screen-result':3,'screen-stats':4,'screen-profile':5,'screen-errors':4};
   const idx=navMap[screenId];
   if(idx!==undefined)document.querySelectorAll('.nav-item')[idx].classList.add('active');
 
@@ -655,7 +698,7 @@ function navigate(screenId){
   if(screenHistory[screenHistory.length-1]!==screenId)screenHistory.push(screenId);
 
   // Update header
-  const titles={'screen-home':'AIT Simulado Academy','screen-phase':'Estudar','screen-content':'Conteúdo','screen-category':'Simulado','screen-quiz':'Simulado DETRAN','screen-result':'Resultado','screen-errors':'Revisão de Erros','screen-stats':'Desempenho','screen-profile':'Perfil'};
+  const titles={'screen-home':'AIT Simulado Academy','screen-phase':'Estudar','screen-content':'Conteúdo','screen-category':'Simulado','screen-quiz':'Simulado DETRAN','screen-result':'Resultado','screen-errors':'Revisão de Erros','screen-stats':'Desempenho','screen-profile':'Perfil','screen-signs':'Placas de Trânsito'};
   document.getElementById('headerTitle').textContent=titles[screenId]||'AIT Simulado';
 
   // Refresh data on certain screens
@@ -830,7 +873,11 @@ function beginSimulado(){
     (q.category==='A'&&state.category==='AB')||
     (q.category==='CDE'&&['C','D','E'].includes(state.category)));
   pool=shuffleArray(pool);
-  startQuizWithQuestions(pool.slice(0,30),30,state.doubleTime?7200:3600);
+  // No máximo 5 questões de placas por simulado
+  const signQs=pool.filter(q=>q.sign).slice(0,5);
+  const others=pool.filter(q=>!q.sign);
+  const chosen=shuffleArray(signQs.concat(others.slice(0,30-signQs.length)));
+  startQuizWithQuestions(chosen,30,state.doubleTime?7200:3600);
 }
 
 function startQuizWithQuestions(questions,total,timeSeconds){
@@ -1212,5 +1259,6 @@ if('serviceWorker' in navigator){
 
 updateHome();
 </script>
+<script src="/placas.js"></script>
 </body>
 </html>
