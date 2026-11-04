@@ -106,6 +106,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .law-art{font-size:11px;color:var(--blue);font-weight:700}
 .law-chip{background:rgba(59,130,246,.15);color:var(--blue);border:1px solid rgba(59,130,246,.4);border-radius:20px;padding:5px 10px;font-size:12px;margin:4px 6px 0 0;cursor:pointer}
 .label-sm{font-size:11px;color:var(--blue);font-weight:700;margin-bottom:4px}
+.skip-warn{background:rgba(250,204,21,.12);border:2px solid #facc15;border-radius:var(--radius);padding:16px;margin-bottom:14px;animation:warnBlink 1.4s ease-in-out infinite}
+.skip-warn h3{color:#facc15;margin:4px 0 8px}
+.skip-warn p,.skip-warn li{font-size:13px;line-height:1.5;color:#e2e8f0;margin-bottom:6px}
+.skip-warn ol{padding-left:20px;margin-bottom:8px}
+@keyframes warnBlink{0%,100%{border-color:#facc15;box-shadow:0 0 0 0 rgba(250,204,21,.5)}50%{border-color:#a16207;box-shadow:0 0 14px 2px rgba(250,204,21,.35)}}
+@media (prefers-reduced-motion:reduce){.skip-warn{animation:none}}
 /* Recuperar CNH */
 .rec-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .rec-opt{background:var(--dark2);border:2px solid var(--dark3);border-radius:var(--radius);padding:12px;font-size:13px;font-weight:600;cursor:pointer;text-align:center}
@@ -256,20 +262,20 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <div style="font-size:11px;color:var(--gray)" id="phase0-pct">0% completo</div>
   </div>
 
-  <div class="phase-card card locked" id="phase1-card" onclick="openPhase(1)">
+  <div class="phase-card card" id="phase1-card" onclick="openPhase(1)">
     <div class="card-header">
       <h3>🚗 Fase 2 — Direção e Socorros</h3>
-      <span class="badge badge-gray" id="phase1-badge">Bloqueado</span>
+      <span class="badge badge-gray" id="phase1-badge">Livre</span>
     </div>
     <p>Direção defensiva, primeiros socorros, meio ambiente e cidadania</p>
     <div class="progress-bar"><div class="progress-fill blue" id="phase1-progress" style="width:0%"></div></div>
     <div style="font-size:11px;color:var(--gray)" id="phase1-pct">0% completo</div>
   </div>
 
-  <div class="phase-card card locked" id="phase2-card" onclick="openPhase(2)">
+  <div class="phase-card card" id="phase2-card" onclick="openPhase(2)">
     <div class="card-header">
       <h3>🔧 Fase 3 — Mecânica e Categoria</h3>
-      <span class="badge badge-gray" id="phase2-badge">Bloqueado</span>
+      <span class="badge badge-gray" id="phase2-badge">Livre</span>
     </div>
     <p>Mecânica básica, funcionamento do veículo e conteúdo específico da categoria</p>
     <div class="progress-bar"><div class="progress-fill blue" id="phase2-progress" style="width:0%"></div></div>
@@ -279,6 +285,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
   <div class="section-title">Acesso Rápido</div>
 
   <div class="card" id="srsCard" style="cursor:pointer;border-color:var(--purple,#a855f7)" onclick="startSmartReview()"></div>
+  <div class="card" id="catStudyCard" style="cursor:pointer" onclick="openCatStudy()">
+    <div class="card-header"><h3>🏍️🚚 Estudo por categoria</h3><span class="badge badge-blue">Novo</span></div>
+    <p>Questões específicas para motos (A) e para motoristas profissionais (C, D e E).</p>
+  </div>
   <div class="card" style="cursor:pointer;border-color:var(--green)" onclick="openRecover()">
     <div class="card-header"><h3>🔄 Recuperar minha CNH</h3><span class="badge badge-green">Novo</span></div>
     <p>CNH suspensa ou cassada, PPD ou multa para recorrer: passo a passo, calculadora de pontos e treino para a reciclagem.</p>
@@ -459,6 +469,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 
 <!-- SCREEN: RECUPERAR CNH -->
 <div class="screen" id="screen-recover"><div id="recoverBody"></div></div>
+
+<div class="modal-bg" id="skipModal" onclick="if(event.target===this)closeSkip()">
+  <div class="modal-sheet"><div id="skipBody"></div></div>
+</div>
 
 <!-- SCREEN: STATS -->
 <div class="screen" id="screen-stats">
@@ -791,11 +805,14 @@ function updateHome(){
     if(i>0){
       const card=document.getElementById(`phase${i}-card`);
       const badge=document.getElementById(`phase${i}-badge`);
+      card.classList.remove('locked');
+      card.classList.toggle('current',i===state.currentPhase);
       if(state.phasesUnlocked[i]){
-        card.classList.remove('locked');
-        card.classList.toggle('current',i===state.currentPhase);
         badge.textContent=pct===100?'Completo':pct>0?'Em andamento':'Disponível';
         badge.className='badge '+(pct===100?'badge-green':pct>0?'badge-blue':'badge-orange');
+      } else {
+        badge.textContent=pct>0?'Em andamento':'Livre';
+        badge.className='badge '+(pct>0?'badge-blue':'badge-gray');
       }
     } else {
       const badge=document.getElementById(`phase0-badge`);
@@ -812,9 +829,9 @@ function updateHome(){
 // ============================================
 // PHASE & TOPICS
 // ============================================
-function openPhase(idx){
-  if(!state.phasesUnlocked[idx]){
-    alert('Complete a fase anterior para desbloquear esta fase!');
+function openPhase(idx,skipCheck){
+  if(!skipCheck&&!state.phasesUnlocked[idx]&&!(state.skipWarnOff||{})[idx]){
+    showSkipWarning(idx);
     return;
   }
   state.currentPhase=idx;
@@ -849,6 +866,31 @@ function openPhase(idx){
   navigate('screen-phase');
 }
 
+// Aviso ao abrir uma fase fora da ordem recomendada
+function showSkipWarning(idx){
+  const prev=PHASES.findIndex((p,i)=>i<idx&&!p.topics.every(t=>state.topicProgress[t.id]));
+  const prevIdx=prev<0?0:prev;
+  document.getElementById('skipBody').innerHTML=`
+    <div class="skip-warn">
+      <div style="font-size:28px">⚠️</div>
+      <h3>Atenção antes de pular etapas</h3>
+      <p>As fases foram pensadas em sequência:</p>
+      <ol>
+        <li><strong>Fase 1 — Legislação</strong> (a matéria com mais questões na prova)</li>
+        <li><strong>Fase 2 — Direção Defensiva e Primeiros Socorros</strong></li>
+        <li><strong>Fase 3 — Mecânica e Categoria</strong></li>
+      </ol>
+      <p>Se você já tem CNH, está mudando de categoria ou já domina o conteúdo, pode seguir. Mas lembre-se: <strong>a prova do Detran cobra todas as matérias</strong>, e as regras mudam com frequência. Pular uma fase pode diminuir o seu desempenho no exame.</p>
+      <p style="font-size:12px">💡 Dica: faça um simulado para descobrir o que você já sabe e o que precisa revisar.</p>
+    </div>
+    <button class="btn btn-primary" onclick="closeSkip();openPhase(${prevIdx},true)">Ir para a ${PHASES[prevIdx].name.split(' —')[0]} (recomendado)</button>
+    <button class="btn btn-outline" style="margin-top:8px" onclick="closeSkip();openPhase(${idx},true)">Já conheço, quero estudar esta fase</button>
+    <label style="display:flex;gap:8px;align-items:center;font-size:12px;color:var(--gray);margin-top:12px;cursor:pointer"><input type="checkbox" id="skipNoMore"> Não mostrar este aviso de novo para esta fase</label>`;
+  document.getElementById('skipNoMore').onchange=e=>{state.skipWarnOff=state.skipWarnOff||{};state.skipWarnOff[idx]=e.target.checked;saveState();};
+  document.getElementById('skipModal').classList.add('show');
+}
+function closeSkip(){document.getElementById('skipModal').classList.remove('show');}
+
 let currentTopic=null;
 function openTopic(topic){
   currentTopic=topic;
@@ -867,7 +909,7 @@ function markTopicComplete(){
     if(allDone && state.currentPhase<2){
       state.phasesUnlocked[state.currentPhase+1]=true;
       saveState();
-      alert('Parabéns! Fase concluída! A próxima fase foi desbloqueada.');
+      alert('Parabéns! Fase concluída! Agora siga para a próxima fase.');
     }
 
     openPhase(state.currentPhase);

@@ -93,6 +93,54 @@ const NEW=[
 {theme:C,text:'Se o pedal do freio estiver "baixo" ou "esponjoso", é sinal de:',options:['Freio funcionando perfeitamente','Possível ar no sistema, falta de fluido ou desgaste: procure uma oficina','Pneus descalibrados','Bateria fraca'],correct:1,explanation:'Pedal baixo ou mole indica problema no sistema de freios. Não arrisque: leve o veículo para revisão.',legal:'Manual de Mecânica Básica'},
 ];
 
+
+// ============================================
+// QUESTÕES POR CATEGORIA (motos e profissionais)
+// ============================================
+const CAT=[
+// ---------- MOTOS (A) ----------
+{theme:L,category:'A',text:'Pilotar motocicleta sem capacete de segurança é infração:',options:['Média','Grave','Gravíssima, com suspensão do direito de dirigir','Leve'],correct:2,explanation:'O Art. 244, I prevê infração gravíssima, multa e suspensão do direito de dirigir para quem conduz moto sem capacete (com viseira ou óculos de proteção).',legal:'CTB Art. 244'},
+{theme:L,category:'A',text:'Andar com a moto equilibrando-se em apenas uma roda ("empinar") é infração:',options:['Leve','Média','Grave','Gravíssima, com suspensão do direito de dirigir'],correct:3,explanation:'O Art. 244, III considera infração gravíssima fazer malabarismo ou equilibrar-se em uma roda só, com suspensão do direito de dirigir.',legal:'CTB Art. 244'},
+{theme:L,category:'A',text:'Conduzir motocicleta com os faróis apagados é infração:',options:['Leve','Média','Grave','Gravíssima'],correct:3,explanation:'O Art. 244, IV considera infração gravíssima conduzir moto com os faróis apagados. Lembre-se: na moto, o farol fica aceso de dia e de noite.',legal:'CTB Art. 244'},
+{theme:L,category:'A',text:'O condutor de motocicleta deve segurar o guidom:',options:['Com uma mão, se estiver em baixa velocidade','Com as duas mãos, salvo para indicar manobras','Como preferir','Com uma mão em rodovias'],correct:1,explanation:'O Art. 54 exige que o condutor segure o guidom com as duas mãos. Soltar uma das mãos só é permitido para fazer os gestos de sinalização.',legal:'CTB Art. 54'},
+{theme:L,category:'A',text:'O capacete do motociclista deve ter:',options:['Apenas a cor branca','Viseira ou ser usado com óculos de proteção','Adesivos refletivos só à noite','Qualquer modelo, mesmo sem certificação'],correct:1,explanation:'O Art. 54 e as resoluções do CONTRAN exigem capacete certificado, com viseira ou óculos de proteção, e bem afivelado.',legal:'CTB Art. 54'},
+{theme:L,category:'A',text:'Para trabalhar como motofretista ou mototaxista, é preciso, entre outros requisitos:',options:['Ter 18 anos e qualquer categoria','Ter 21 anos, 2 anos de habilitação na categoria A e curso especializado','Apenas ter uma moto própria','Ter categoria B'],correct:1,explanation:'A Lei 12.009/2009 exige idade mínima de 21 anos, pelo menos 2 anos de habilitação na categoria A, curso especializado e uso de colete com refletivos.',legal:'Lei 12.009/2009'},
+{theme:D,category:'A',text:'Na moto, a frenagem mais eficiente e segura é feita:',options:['Só com o freio traseiro','Só com o freio dianteiro, de uma vez','Com os dois freios, de forma progressiva','Desligando o motor'],correct:2,explanation:'Usar os dois freios ao mesmo tempo, aumentando a força aos poucos, dá mais estabilidade. O freio dianteiro faz a maior parte do trabalho, mas travá-lo de repente pode derrubar a moto.',legal:'Manual de Direção Defensiva'},
+{theme:D,category:'A',text:'Na chuva, o motociclista deve ter cuidado especial com:',options:['Faixas pintadas no asfalto e tampas de bueiro','A cor das placas','O barulho do motor','O vento a favor'],correct:0,explanation:'Pinturas, tampas metálicas e trilhos ficam muito escorregadios quando molhados. Evite frear ou inclinar a moto sobre eles.',legal:'Manual de Direção Defensiva'},
+{theme:D,category:'A',text:'Ao circular perto de caminhões e ônibus, o motociclista deve:',options:['Ficar bem colado na traseira para cortar o vento','Evitar os pontos cegos e se manter visível pelos retrovisores do motorista','Passar sempre pela direita','Buzinar o tempo todo'],correct:1,explanation:'Veículos grandes têm pontos cegos enormes. Se você não vê os espelhos do motorista, ele também não vê você.',legal:'Manual de Direção Defensiva'},
+{theme:C,category:'A',text:'Na manutenção da motocicleta, a corrente de transmissão deve:',options:['Ficar sempre bem frouxa','Ser mantida limpa, lubrificada e com a folga indicada pelo fabricante','Nunca ser verificada','Ser lavada com gasolina toda semana'],correct:1,explanation:'Corrente seca, suja ou com folga errada desgasta a transmissão e pode até escapar, causando acidentes.',legal:'Manual de Mecânica Básica'},
+
+// ---------- PROFISSIONAIS (C, D e E) ----------
+{theme:L,category:'CDE',text:'Para se habilitar na categoria D, o candidato deve, entre outros requisitos:',options:['Ter 18 anos','Ser maior de 21 anos e estar habilitado há pelo menos 2 anos na B ou 1 ano na C','Ter qualquer categoria há 6 meses','Ter apenas curso de primeiros socorros'],correct:1,explanation:'O Art. 145 exige ser maior de 21 anos e estar habilitado no mínimo há 2 anos na categoria B, ou no mínimo há 1 ano na categoria C.',legal:'CTB Art. 145'},
+{theme:L,category:'CDE',text:'Para se habilitar na categoria E, o candidato deve estar habilitado há pelo menos:',options:['6 meses na categoria A','1 ano na categoria C','5 anos na categoria B','Não há exigência'],correct:1,explanation:'O Art. 145 exige, para a categoria E, ser maior de 21 anos e estar habilitado no mínimo há 1 ano na categoria C.',legal:'CTB Art. 145'},
+{theme:L,category:'CDE',text:'O motorista profissional de transporte de CARGA deve observar um descanso mínimo de:',options:['10 minutos a cada 8 horas de direção','30 minutos a cada 6 horas de direção, sem passar de 5h30 ao volante sem parar','1 hora por dia','Nenhum descanso obrigatório'],correct:1,explanation:'Pelo Art. 67-C, é proibido dirigir por mais de 5h30 ininterruptas, e devem ser observados 30 minutos de descanso dentro de cada 6 horas de direção no transporte de carga. No transporte rodoviário de passageiros, são 30 minutos a cada 4 horas.',legal:'CTB Art. 67-C'},
+{theme:L,category:'CDE',text:'Para transportar produtos perigosos, o condutor precisa ter:',options:['Apenas categoria B','Curso especializado de Movimentação Operacional de Produtos Perigosos (MOPP)','Somente o exame toxicológico','Nenhum requisito especial'],correct:1,explanation:'O transporte de produtos perigosos exige curso especializado (MOPP), além da categoria compatível com o veículo.',legal:'CTB Art. 145 e Resolução CONTRAN'},
+{theme:L,category:'CDE',text:'O exame toxicológico exigido para as categorias C, D e E detecta o consumo de substâncias em uma janela mínima de:',options:['24 horas','7 dias','30 dias','90 dias'],correct:3,explanation:'O exame é feito com amostra de cabelo, pelos ou unhas e tem janela de detecção mínima de 90 dias.',legal:'CTB Art. 148-A e Resolução CONTRAN'},
+{theme:L,category:'CDE',text:'Transitar com o veículo com excesso de peso (acima da tolerância) é infração:',options:['Leve','Média, com multa acrescida conforme o excesso','Gravíssima sempre','Não é infração'],correct:1,explanation:'O Art. 231, V considera infração média, com multa acrescida a cada faixa de excesso de peso, além da retenção do veículo para transbordo da carga.',legal:'CTB Art. 231'},
+{theme:D,category:'CDE',text:'Os pontos cegos de um caminhão ou ônibus são:',options:['Inexistentes, por causa dos espelhos grandes','Maiores que os de um carro, principalmente na lateral direita, na frente e atrás','Apenas atrás do veículo','Iguais aos de uma moto'],correct:1,explanation:'Quanto maior o veículo, maiores os pontos cegos. O motorista profissional deve ajustar bem os espelhos e redobrar a atenção ao mudar de faixa e fazer conversões.',legal:'Manual de Direção Defensiva'},
+{theme:D,category:'CDE',text:'Em uma conversão à direita com um caminhão longo, o motorista deve:',options:['Abrir para a esquerda sem olhar','Fazer a curva bem aberta, com cuidado com ciclistas e pedestres do lado direito','Subir na calçada','Virar o mais rápido possível'],correct:1,explanation:'As rodas traseiras fazem uma curva mais fechada que as dianteiras. É preciso abrir a curva com cuidado e atenção a quem está à direita.',legal:'Manual de Direção Defensiva'},
+{theme:C,category:'CDE',text:'Em caminhões e ônibus com freio a ar, se a luz ou o alarme de baixa pressão do ar acender, o motorista deve:',options:['Continuar até o destino','Parar em local seguro e não seguir viagem até corrigir o problema','Acelerar para encher o reservatório','Desligar o alarme'],correct:1,explanation:'Pressão de ar baixa compromete os freios. Pare com segurança e só continue após a correção.',legal:'Manual de Mecânica Básica'},
+];
+if(typeof QUESTIONS!=='undefined'){
+  CAT.forEach((q,i)=>QUESTIONS.push(Object.assign({id:4000+i},q)));
+}
+window.openCatStudy=function(){
+  const nA=QUESTIONS.filter(q=>q.category==='A').length;
+  const nP=QUESTIONS.filter(q=>q.category==='CDE').length;
+  document.getElementById('skipBody').innerHTML=`
+    <h3 style="margin-bottom:6px">🏍️🚚 Estudo por categoria</h3>
+    <p style="font-size:13px;margin-bottom:14px">Questões específicas da sua categoria. As questões gerais continuam no simulado completo.</p>
+    <button class="btn btn-primary" onclick="startCatQuiz('A')">🏍️ Motos — categoria A (${nA} questões)</button>
+    <button class="btn btn-primary" style="margin-top:8px" onclick="startCatQuiz('CDE')">🚚🚌 Profissionais — categorias C, D e E (${nP} questões)</button>
+    <button class="btn btn-outline" style="margin-top:8px" onclick="closeSkip()">Fechar</button>`;
+  document.getElementById('skipModal').classList.add('show');
+};
+window.startCatQuiz=function(cat){
+  closeSkip();
+  const qs=shuffleArray(QUESTIONS.filter(q=>q.category===cat));
+  startQuizWithQuestions(qs,qs.length,qs.length*120);
+};
+
 if(typeof QUESTIONS!=='undefined'){
   NEW.forEach((q,i)=>QUESTIONS.push(Object.assign({id:3000+i,category:'all'},q)));
 }
