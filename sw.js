@@ -1,6 +1,6 @@
 // Service worker: busca a versão nova primeiro (rede) e usa o cache só quando estiver offline.
-const CACHE_NAME = 'ait-simulado-v10';
-const ASSETS = ['/', '/index.html', '/manifest.json', '/placas.js', '/leis.js', '/recuperar.js', '/questoes.js', '/assistente.js'];
+const CACHE_NAME = 'ait-simulado-v11';
+const ASSETS = ['/', '/index.html', '/manifest.json', '/placas.js', '/leis.js', '/recuperar.js', '/questoes.js', '/assistente.js', '/icon-192.png', '/icon-512.png', '/apple-touch-icon.png'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(ASSETS)));
