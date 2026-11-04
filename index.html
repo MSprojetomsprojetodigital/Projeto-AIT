@@ -278,6 +278,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 
   <div class="section-title">Acesso Rápido</div>
 
+  <div class="card" id="srsCard" style="cursor:pointer;border-color:var(--purple,#a855f7)" onclick="startSmartReview()"></div>
   <div class="card" style="cursor:pointer;border-color:var(--green)" onclick="openRecover()">
     <div class="card-header"><h3>🔄 Recuperar minha CNH</h3><span class="badge badge-green">Novo</span></div>
     <p>CNH suspensa ou cassada, PPD ou multa para recorrer: passo a passo, calculadora de pontos e treino para a reciclagem.</p>
@@ -1001,6 +1002,7 @@ function confirmAnswer(){
   qs.confirmed=true;
   const q=qs.questions[qs.current];
   const isCorrect=qs.selectedOption===q.correct;
+  if(window.srsRecord)srsRecord(q.id,isCorrect);
 
   qs.answers[qs.current]=isCorrect?'correct':'wrong';
 
@@ -1311,5 +1313,6 @@ updateHome();
 <script src="/placas.js"></script>
 <script src="/leis.js"></script>
 <script src="/recuperar.js"></script>
+<script src="/questoes.js"></script>
 </body>
 </html>

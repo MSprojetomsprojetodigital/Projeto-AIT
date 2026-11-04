@@ -1,6 +1,6 @@
 // Service worker: busca a versão nova primeiro (rede) e usa o cache só quando estiver offline.
-const CACHE_NAME = 'ait-simulado-v6';
-const ASSETS = ['/', '/index.html', '/manifest.json', '/placas.js', '/leis.js', '/recuperar.js'];
+const CACHE_NAME = 'ait-simulado-v7';
+const ASSETS = ['/', '/index.html', '/manifest.json', '/placas.js', '/leis.js', '/recuperar.js', '/questoes.js'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(ASSETS)));
