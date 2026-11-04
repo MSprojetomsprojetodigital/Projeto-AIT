@@ -1,5 +1,5 @@
 // Service worker: busca a versão nova primeiro (rede) e usa o cache só quando estiver offline.
-const CACHE_NAME = 'ait-simulado-v8';
+const CACHE_NAME = 'ait-simulado-v9';
 const ASSETS = ['/', '/index.html', '/manifest.json', '/placas.js', '/leis.js', '/recuperar.js', '/questoes.js'];
 
 self.addEventListener('install', e => {

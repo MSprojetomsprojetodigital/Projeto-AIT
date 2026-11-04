@@ -220,6 +220,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 /* Scrollable */
 .scroll-x{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;-webkit-overflow-scrolling:touch}
 .scroll-x::-webkit-scrollbar{display:none}
+.quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.quick-card{min-width:0;padding:14px 12px;margin-bottom:0}
+.quick-card h3{font-size:13px;line-height:1.3}
+.quick-card p{font-size:11px;line-height:1.3}
 
 /* Performance chart bars */
 .perf-bar-container{display:flex;align-items:center;gap:8px;margin-bottom:8px}
@@ -301,18 +305,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
     <div class="card-header"><h3>🚦 Placas de Trânsito</h3><span class="badge badge-orange">Novo</span></div>
     <p>Regulamentação, advertência, indicação, obras e placas complementares. Com quiz "Que placa é esta?"</p>
   </div>
-  <div class="scroll-x">
-    <div class="card" style="min-width:160px;cursor:pointer" onclick="startSimulado()">
+  <div class="quick-grid">
+    <div class="card quick-card" style="cursor:pointer" onclick="startSimulado()">
       <div style="font-size:28px;margin-bottom:8px">📝</div>
       <h3 style="font-size:13px">Simulado DETRAN</h3>
       <p style="font-size:11px">30 questões, 60 min</p>
     </div>
-    <div class="card" style="min-width:160px;cursor:pointer" onclick="navigate('screen-errors')">
+    <div class="card quick-card" style="cursor:pointer" onclick="navigate('screen-errors')">
       <div style="font-size:28px;margin-bottom:8px">❌</div>
       <h3 style="font-size:13px">Revisão de Erros</h3>
       <p style="font-size:11px" id="errorCount">0 erros para revisar</p>
     </div>
-    <div class="card" style="min-width:160px;cursor:pointer" onclick="navigate('screen-stats')">
+    <div class="card quick-card" style="cursor:pointer" onclick="navigate('screen-stats')">
       <div style="font-size:28px;margin-bottom:8px">📊</div>
       <h3 style="font-size:13px">Desempenho</h3>
       <p style="font-size:11px">Veja suas estatísticas</p>
